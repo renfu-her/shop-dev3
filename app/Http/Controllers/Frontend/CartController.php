@@ -12,6 +12,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Auth;
+use App\Events\CartUpdated;
 
 class CartController extends Controller
 {
@@ -74,6 +75,9 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
+        // 廣播購物車數量更新事件
+        broadcast(new CartUpdated(count($cart)));
+
         // 根據 checkout_direct 參數決定跳轉
         if ($request->boolean('checkout_direct')) {
             return redirect()->route('checkout.index');
@@ -112,6 +116,9 @@ class CartController extends Controller
         // 存储到购物车 session
         $cart[] = $cartItem;
         session()->put('cart', $cart);
+
+        // 廣播購物車數量更新事件
+        broadcast(new CartUpdated(count($cart)));
 
         // 根据 checkout_direct 参数决定跳转
         if ($request->boolean('checkout_direct')) {
