@@ -8,7 +8,7 @@
                     <div class="card-header">新增關於我們</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.posts.store') }}">
+                        <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -19,6 +19,23 @@
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="category_id" class="form-label">分類</label>
+                                <select class="form-select @error('category_id') is-invalid @enderror" id="category_id"
+                                    name="category_id" required>
+                                    <option value="">請選擇分類</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -47,6 +64,45 @@
                                 <label class="form-check-label p-1" for="is_active">啟用</label>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="seo_title" class="form-label">SEO 標題</label>
+                                <input type="text" class="form-control @error('seo_title') is-invalid @enderror"
+                                    id="seo_title" name="seo_title" value="{{ old('seo_title') }}">
+                                <div class="form-text">建議在 70 個字元以內</div>
+                                @error('seo_title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="seo_description" class="form-label">SEO 描述</label>
+                                <textarea class="form-control @error('seo_description') is-invalid @enderror" id="seo_description"
+                                    name="seo_description" rows="3">{{ old('seo_description') }}</textarea>
+                                <div class="form-text">建議在 155 個字元以內</div>
+                                @error('seo_description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="seo_keywords" class="form-label">SEO 關鍵字</label>
+                                <input type="text" class="form-control @error('seo_keywords') is-invalid @enderror"
+                                    id="seo_keywords" name="seo_keywords" value="{{ old('seo_keywords') }}">
+                                <div class="form-text">多個關鍵字請用逗號分隔</div>
+                                @error('seo_keywords')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="image" class="form-label">封面圖片</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" 
+                                       id="image" name="image" accept="image/*">
+                                <div class="form-text">支援 jpg、png、gif 格式，檔案大小不超過 4MB</div>
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">

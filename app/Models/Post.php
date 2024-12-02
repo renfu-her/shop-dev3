@@ -17,6 +17,11 @@ class Post extends Model
         'content',
         'sort_order',
         'is_active',
+        'views',
+        'seo_title',
+        'seo_keywords',
+        'seo_description',
+        'image',
     ];
 
     public function category()

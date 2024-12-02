@@ -21,7 +21,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.home-ads.index') }}">
                 <i class="fas fa-ad menu-icon"></i>
                 <span class="menu-title">小幅廣告維護</span>
@@ -40,7 +40,7 @@
                 <i class="fas fa-calendar-alt menu-icon"></i>
                 <span class="menu-title">活動訊息維護</span>
             </a>
-        </li>
+        </li> --}}
 
 
         <li class="nav-item">
@@ -68,7 +68,7 @@
             </div>
         </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#product-management" aria-expanded="false">
                 <i class="fas fa-box menu-icon"></i>
                 <span class="menu-title">商品維護</span>
@@ -84,7 +84,7 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.members.index') }}">
@@ -111,12 +111,12 @@
             </div>
         </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.orders.index') }}">
                 <i class="fas fa-shopping-cart menu-icon"></i>
                 <span class="menu-title">訂單管理</span>
             </a>
-        </li>
+        </li> --}}
 
 
         <li class="nav-item">
@@ -126,12 +126,12 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.settings.index') }}">
                 <i class="fas fa-cog menu-icon"></i>
                 <span class="menu-title">運費設定</span>
             </a>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.admins.index') }}">

@@ -4,13 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Services\ImageService;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     public function index()
     {
         $posts = Post::latest()->paginate(10);
@@ -22,7 +30,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = PostCategory::where('is_active', true)->orderBy('sort_order')->get();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -30,21 +39,44 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required'
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|exists:post_categories,id',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'boolean',
+            'seo_title' => 'nullable|string|max:70',
+            'seo_keywords' => 'nullable|string|max:255',
+            'seo_description' => 'nullable|string|max:155',
         ]);
 
-        Post::create($request->all());
+        
+        $validated['is_active'] = $request->boolean('is_active', false);
+
+        $post = Post::create($validated);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $this->imageService->uploadImage(
+                $request->file('image'),
+                'posts/' . $post->id
+            );
+
+            $post->update([
+                'image' => $validated['image']
+            ]);
+        }
+
         return redirect()->route('admin.posts.index')->with('success', '文章創建成功！');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        $post->increment('views');
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -52,7 +84,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = PostCategory::where('is_active', true)->orderBy('sort_order')->get();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -60,12 +93,37 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required'
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|exists:post_categories,id',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'boolean',
+            'seo_title' => 'nullable|string|max:70',
+            'seo_keywords' => 'nullable|string|max:255',
+            'seo_description' => 'nullable|string|max:155',
         ]);
 
-        $post->update($request->all());
+
+        if ($request->hasFile('image')) {
+            // 刪除舊圖片
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+
+            if ($request->hasFile('image')) {
+                $validated['image'] = $this->imageService->uploadImage(
+                    $request->file('image'),
+                    'posts/' . $post->id
+                );
+            }
+        }
+
+        $validated['is_active'] = $request->boolean('is_active', false);
+
+        $post->update($validated);
+
         return redirect()->route('admin.posts.index')->with('success', '文章更新成功！');
     }
 
@@ -74,6 +132,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // 刪除關聯的圖片
+        if ($post->image) {
+            Storage::delete('public/' . $post->image);
+        }
+
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', '文章刪除成功！');
     }

@@ -19,6 +19,7 @@
                     <thead>
                         <tr>
                             <th style="width: 5%">ID</th>
+                            <th>分類</th>
                             <th>標題</th>
                             <th>排序</th>
                             <th>創建時間</th>
@@ -29,6 +30,7 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <td>{{ $post->id }}</td>
+                                <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
                                     {{ $post->sort_order }}
@@ -68,7 +70,7 @@
                 },
                 responsive: true,
                 order: [
-                    [2, 'asc']
+                    [1, 'asc']
                 ],
                 columnDefs: [{
                     targets: -1,
