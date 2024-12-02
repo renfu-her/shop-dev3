@@ -42,6 +42,32 @@
             </a>
         </li>
 
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#article-management" aria-expanded="false">
+                <i class="fas fa-box menu-icon"></i>
+                <span class="menu-title">文章維護</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="article-management">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.post-categories.index') }}">
+                            <i class="fas fa-newspaper menu-icon"></i>
+                            <span class="menu-title">分類維護</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.posts.index') }}">
+                            <i class="fas fa-newspaper menu-icon"></i>
+                            <span class="menu-title">文章維護</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#product-management" aria-expanded="false">
                 <i class="fas fa-box menu-icon"></i>

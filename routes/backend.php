@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\{
     MemberController,
     HomeAdsController,
     SiteSettingController,
+    PostCategoryController,
 };
 
 
@@ -161,4 +162,7 @@ Route::group([
 
     Route::get('refresh-captcha', [AdminAuthController::class, 'refreshCaptcha'])
         ->name('refresh.captcha');
+
+    // PostCategory 路由
+    Route::resource('post-categories', PostCategoryController::class);
 });

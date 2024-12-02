@@ -13,8 +13,7 @@ staged_count=$(echo "$staged_files" | grep -c "^")
 
 # 顯示已暫存檔案資訊
 if [ ! -z "$staged_files" ]; then
-    echo -e "${GREEN}已暫存檔案列表 (${staged_count}個):${NC}"
-    echo "$staged_files" | xargs -I {} basename {}
+    echo -e "${GREEN}已暫存檔案數量: ${staged_count}個${NC}"
     
     # 獲取第一個已暫存檔案名稱
     first_staged_file=$(echo "$staged_files" | head -n 1 | xargs basename)
@@ -62,8 +61,7 @@ fi
 # 獲取所有未暫存的變更檔案
 changed_files=$(git status --porcelain)
 if [ ! -z "$changed_files" ]; then
-    echo -e "\n${BLUE}未暫存的變更檔案:${NC}"
-    echo "$changed_files" | grep -v "^A" | awk '{print $2}' | xargs -I {} basename {}
+    echo -e "\n${BLUE}有未暫存的變更檔案${NC}"
 fi
 
 # 確保訊息不超過50字元

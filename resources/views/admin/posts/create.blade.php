@@ -41,6 +41,12 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3 d-flex align-items-center">
+                                <input type="checkbox" class="form-check-input p-1" id="is_active" name="is_active"
+                                    value="1" checked>
+                                <label class="form-check-label p-1" for="is_active">啟用</label>
+                            </div>
+
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">
