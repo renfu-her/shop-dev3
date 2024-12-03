@@ -1,5 +1,6 @@
 @php
     $categories = App\Models\Category::getMainCategories();
+    
 @endphp
 
 <div class="collapse navbar-stuck-hide" id="stuckNav">
