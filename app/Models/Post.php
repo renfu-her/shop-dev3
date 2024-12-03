@@ -24,6 +24,10 @@ class Post extends Model
         'image',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public function category()
     {
         return $this->belongsTo(PostCategory::class, 'category_id');

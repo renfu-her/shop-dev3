@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'products';
 
@@ -28,13 +29,15 @@ class Product extends Model
         'meta_title',
         'meta_description'      ,
         'meta_keywords',
-        'content'
+        'content',
+        'is_sale'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
         'is_new' => 'boolean',
-        'is_hot' => 'boolean'
+        'is_hot' => 'boolean',
+        'is_sale' => 'boolean'
     ];
 
     // 與分類的關係
