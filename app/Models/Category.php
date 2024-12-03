@@ -11,7 +11,8 @@ class Category extends Model
     // 獲取子分類
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id')->orderBy('sort_order', 'asc');
+        return $this->hasMany(Category::class, 'parent_id')
+            ->orderBy('sort_order', 'asc');
     }
 
     // 獲取父分類
@@ -20,40 +21,25 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
-    // 遞迴獲取所有父級分類
-    public function getAncestorsAttribute()
+    // 獲取頂層分類及其子分類
+    public static function getMainCategories()
     {
-        $ancestors = collect([]);
-        $parent = $this->parent;
-        
-        while (!is_null($parent)) {
-            $ancestors->push($parent);
-            $parent = $parent->parent;
-        }
-        
-        return $ancestors;
+        return self::where('parent_id', 0)
+            ->orderBy('sort_order')
+            ->with(['children' => function($query) {
+                $query->orderBy('sort_order');
+            }])
+            ->get();
     }
 
-    // 判斷是否為指定分類的祖先
-    public function isAncestorOf($category)
+    // 獲取該分類下的熱門商品
+    public function getHotProducts($limit = 5)
     {
-        return $category->ancestors->contains('id', $this->id);
-    }
-
-    // 判斷是否為指定分類的子孫
-    public function isDescendantOf($category)
-    {
-        return $this->ancestors->contains('id', $category->id);
-    }
-
-    // 與商品的關係
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-
-    public function notes()
-    {
-        return $this->hasMany(Note::class);
+        return $this->products()
+            ->where('is_hot', true)
+            ->where('is_active', true)
+            ->with('primaryImage')
+            ->limit($limit)
+            ->get();
     }
 }
