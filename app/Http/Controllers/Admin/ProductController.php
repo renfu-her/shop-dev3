@@ -49,6 +49,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+        dd($request->all());
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'sub_title' => 'nullable|string|max:255',
@@ -71,6 +74,9 @@ class ProductController extends Controller
         $validated['is_new'] = $request->has('is_new') ? 1 : 0;
         $validated['is_active'] = $request->has('is_active') ? 1 : 0;
         $validated['is_hot'] = $request->has('is_hot') ? 1 : 0;
+
+        dd($validated);
+
         $product = Product::create($validated);
 
         if ($request->hasFile('images')) {
