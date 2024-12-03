@@ -1203,8 +1203,8 @@
     </section>
 
 
-    <!-- Sale Banner (CTA) -->
-    <section class="container pt-5 mt-sm-2 mt-md-3 mt-lg-4">
+    <!-- 特別優惠 (CTA) -->
+    {{-- <section class="container pt-5 mt-sm-2 mt-md-3 mt-lg-4">
         <div class="row g-0">
             <div class="col-md-3 mb-n4 mb-md-0">
                 <div class="position-relative d-flex flex-column align-items-center justify-content-center h-100 py-5">
@@ -1264,13 +1264,13 @@
             </div>
         </div>
         <div class="d-none d-lg-block" style="padding-bottom: 3%"></div>
-    </section>
+    </section> --}}
 
 
-    <!-- Special offers (Carousel) -->
-    <section class="container pt-5 mt-2 mt-sm-3 mt-lg-4">
+    <!-- 特別優惠 (Carousel) -->
+    {{-- <section class="container pt-5 mt-2 mt-sm-3 mt-lg-4">
 
-        <!-- Heading + Countdown -->
+        <!-- 標題 + 倒計時 -->
         <div class="d-flex align-items-start align-items-md-center justify-content-between border-bottom pb-3 pb-md-4">
             <div class="d-md-flex align-items-center">
                 <h2 class="h3 pe-3 me-3 mb-md-0">Special offers for you</h2>
@@ -1761,10 +1761,10 @@
                 </button>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
-    <!-- Brands -->
+    <!-- 品牌 -->
     <section class="container pt-4 pt-md-5 pb-5 mt-sm-2 mb-2 mb-sm-3 mb-md-4 mb-lg-5">
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 g-md-4 g-lg-3 g-xl-4">
             <div class="col">

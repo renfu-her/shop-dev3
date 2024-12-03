@@ -54,23 +54,23 @@
     <!-- Customizer offcanvas -->
     <div class="offcanvas offcanvas-end" id="customizer" tabindex="-1">
         <div class="offcanvas-header border-bottom">
-            <h4 class="h5 offcanvas-title">Customize theme</h4>
+            <h4 class="h5 offcanvas-title">自訂主題</h4>
             <button class="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
 
-            <!-- Customizer settings -->
+            <!-- 自訂設定 -->
             <div class="customizer-collapse collapse show" id="customizerSettings">
 
-                <!-- Colors -->
+                <!-- 顏色 -->
                 <div class="pb-4 mb-2">
                     <div class="d-flex align-items-center mb-3">
                         <i class="ci-paint text-body-tertiary fs-5 me-2"></i>
-                        <h5 class="fs-lg mb-0">Colors</h5>
+                        <h5 class="fs-lg mb-0">顏色</h5>
                     </div>
                     <div class="row row-cols-2 g-3" id="theme-colors">
                         <div class="col">
-                            <h6 class="fs-sm mb-2">Primary</h6>
+                            <h6 class="fs-sm mb-2">主色</h6>
                             <div class="color-swatch d-flex border rounded gap-3 p-2" id="theme-primary"
                                 data-color-labels="[&quot;theme-primary&quot;, &quot;primary&quot;, &quot;primary-rgb&quot;]">
                                 <input type="text" class="form-control bg-transparent border-0 rounded-0 p-1"
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h6 class="fs-sm mb-2">Success</h6>
+                            <h6 class="fs-sm mb-2">成功</h6>
                             <div class="color-swatch d-flex border rounded gap-3 p-2" id="theme-success"
                                 data-color-labels="[&quot;theme-success&quot;, &quot;success&quot;, &quot;success-rgb&quot;]">
                                 <input type="text" class="form-control bg-transparent border-0 rounded-0 p-1"
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h6 class="fs-sm mb-2">Warning</h6>
+                            <h6 class="fs-sm mb-2">警告</h6>
                             <div class="color-swatch d-flex border rounded gap-3 p-2" id="theme-warning"
                                 data-color-labels="[&quot;theme-warning&quot;, &quot;warning&quot;, &quot;warning-rgb&quot;]">
                                 <input type="text" class="form-control bg-transparent border-0 rounded-0 p-1"
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h6 class="fs-sm mb-2">Danger</h6>
+                            <h6 class="fs-sm mb-2">危險</h6>
                             <div class="color-swatch d-flex border rounded gap-2 p-2" id="theme-danger"
                                 data-color-labels="[&quot;theme-danger&quot;, &quot;danger&quot;, &quot;danger-rgb&quot;]">
                                 <input type="text" class="form-control bg-transparent border-0 rounded-0 p-1"
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h6 class="fs-sm mb-2">Info</h6>
+                            <h6 class="fs-sm mb-2">資訊</h6>
                             <div class="color-swatch d-flex border rounded gap-2 p-2" id="theme-info"
                                 data-color-labels="[&quot;theme-info&quot;, &quot;info&quot;, &quot;info-rgb&quot;]">
                                 <input type="text" class="form-control bg-transparent border-0 rounded-0 p-1"
@@ -132,16 +132,16 @@
                     </div>
                 </div>
 
-                <!-- Direction -->
+                <!-- 方向 -->
                 <div class="pb-4 mb-2">
                     <div class="d-flex align-items-center pb-1 mb-2">
                         <i class="ci-sort text-body-tertiary fs-lg me-2" style="transform: rotate(90deg)"></i>
-                        <h5 class="fs-lg mb-0">Direction</h5>
+                        <h5 class="fs-lg mb-0">方向</h5>
                     </div>
                     <div class="d-flex align-items-center justify-content-between border rounded p-3">
                         <div class="me-3">
                             <h6 class="mb-1">RTL</h6>
-                            <p class="fs-sm mb-0">Change text direction</p>
+                            <p class="fs-sm mb-0">改變文字方向</p>
                         </div>
                         <div class="form-check form-switch m-0">
                             <input type="checkbox" class="form-check-input" role="switch" id="rtl-switch">
@@ -150,18 +150,17 @@
                     <div class="alert alert-info p-2 mt-2 mb-0">
                         <div class="d-flex text-body-emphasis fs-xs py-1 pe-1">
                             <i class="ci-info text-info fs-lg mb-2 mb-sm-0" style="margin-top: .125rem"></i>
-                            <div class="ps-2">To switch the text direction of your webpage from LTR to RTL, please
-                                consult the detailed instructions provided in the relevant section of our documentation.
+                            <div class="ps-2">要將網頁的文字方向從 LTR 改為 RTL，請參閱我們文件中的詳細說明。
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Border width -->
+                <!-- 邊框寬度 -->
                 <div class="pb-4 mb-2">
                     <div class="d-flex align-items-center pb-1 mb-2">
                         <i class="ci-menu text-body-tertiary fs-lg me-2"></i>
-                        <h5 class="fs-lg mb-0">Border width, px</h5>
+                        <h5 class="fs-lg mb-0">邊框寬度, px</h5>
                     </div>
                     <div class="slider-input d-flex align-items-center gap-3 border rounded p-3" id="border-input">
                         <input type="range" class="form-range" min="0" max="10" step="1"
@@ -171,10 +170,10 @@
                     </div>
                 </div>
 
-                <!-- Rounding -->
+                <!-- 圓角 -->
                 <div class="d-flex align-items-center pb-1 mb-2">
                     <i class="ci-maximize text-body-tertiary fs-lg me-2"></i>
-                    <h5 class="fs-lg mb-0">Rounding, rem</h5>
+                    <h5 class="fs-lg mb-0">圓角, rem</h5>
                 </div>
                 <div class="slider-input d-flex align-items-center gap-3 border rounded p-3">
                     <input type="range" class="form-range" min="0" max="5" step=".05"
@@ -184,19 +183,18 @@
                 </div>
             </div>
 
-            <!-- Customizer code -->
+            <!-- 自訂設定程式碼 -->
             <div class="customizer-collapse collapse" id="customizerCode">
                 <div class="nav mb-3">
                     <a class="nav-link animate-underline fs-base p-0" href=".customizer-collapse"
                         data-bs-toggle="collapse" aria-expanded="true"
                         aria-controls="customizerSettings customizerCode">
                         <i class="ci-chevron-left fs-lg ms-n1 me-1"></i>
-                        <span class="animate-target">Back to settings</span>
+                        <span class="animate-target">返回設定</span>
                     </a>
                 </div>
-                <p class="fs-sm pb-1">To apply the provided styles to your webpage, enclose them within a
-                    <code>&lt;style&gt;</code> tag and insert this tag into the <code>&lt;head&gt;</code> section of
-                    your HTML document after the following link to the main stylesheet:<br><code>&lt;link
+                <p class="fs-sm pb-1">要將提供的樣式應用到您的網頁，請將它們包含在 <code>&lt;style&gt;</code> 標籤中，
+                    並將此標籤插入到 HTML 文件的 <code>&lt;head&gt;</code> 部分，在以下主樣式表的連結之後：<br><code>&lt;link
                         href="assets/css/theme.min.css"&gt;</code>
                 </p>
                 <div class="position-relative bg-body-tertiary rounded overflow-hidden pt-3">
@@ -204,7 +202,7 @@
                         <button type="button" class="btn btn-sm btn-outline-dark w-100"
                             data-copy-text-from="#generated-styles" data-done-label="Code copied">
                             <i class="ci-copy fs-sm me-1"></i>
-                            Copy code
+                            複製程式碼
                         </button>
                     </div>
                     <pre class="text-wrap bg-transparent border-0 fs-xs text-body-emphasis p-4 pt-5" id="generated-styles"></pre>
@@ -212,17 +210,17 @@
             </div>
         </div>
 
-        <!-- Offcanvas footer (Action buttons) -->
+        <!-- 關閉按鈕 -->
         <div class="offcanvas-header border-top gap-3 d-none" id="customizer-btns">
             <button type="button" class="btn btn-lg btn-secondary w-100 fs-sm" id="customizer-reset">
                 <i class="ci-trash fs-lg me-2 ms-n1"></i>
-                Reset
+                重置
             </button>
             <button class="btn btn-lg btn-primary hiding-collapse-toggle w-100 fs-sm collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target=".customizer-collapse" aria-expanded="false"
                 aria-controls="customizerSettings customizerCode">
                 <i class="ci-code fs-lg me-2 ms-n1"></i>
-                Show code
+                顯示程式碼
             </button>
         </div>
     </div>
