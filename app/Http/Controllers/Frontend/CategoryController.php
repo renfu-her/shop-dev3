@@ -38,4 +38,5 @@ class CategoryController extends Controller
 
         return view('frontend.category.show', compact('category', 'breadcrumbs'));
     }
+    
 } 

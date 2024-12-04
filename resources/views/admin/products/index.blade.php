@@ -27,12 +27,12 @@
                         <tr>
                             <th style="width: 5%">ID</th>
                             <th>圖片</th>
-                            <th>名稱</th>
-                            <th>原價</th>
-                            <th>優惠價</th>
-                            <th>庫存</th>
-                            <th>分類</th>
-                            <th>是否啟用</th>
+                            <th style="width: 20%">名稱</th>
+                            <th style="width: 10%">原價</th>
+                            <th style="width: 10%">優惠價</th>
+                            <th style="width: 10%">庫存</th>
+                            <th style="width: 10%">分類</th>
+                            <th style="width: 8%">狀態</th>
                             <th style="width: 15%">操作</th>
                         </tr>
                     </thead>
@@ -62,14 +62,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span class="badge bg-{{ $product->is_active ? 'success' : 'danger' }}">
+                                    <span class="badge mb-1 bg-{{ $product->is_active ? 'success' : 'danger' }}">
                                         {{ $product->is_active ? '啟用' : '停用' }}
                                     </span>
                                     @if ($product->is_new)
-                                        <span class="badge bg-info">新品</span>
+                                        <span class="badge mb-1 bg-info">新品</span>
                                     @endif
                                     @if ($product->is_hot)
-                                        <span class="badge bg-warning">熱銷</span>
+                                        <span class="badge mb-1 bg-warning">熱銷</span>
                                     @endif
                                 </td>
                                 <td>

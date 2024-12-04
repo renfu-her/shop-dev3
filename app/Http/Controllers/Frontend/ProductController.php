@@ -9,7 +9,7 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
-    public function index($id)
+    public function index($id = null)
     {
         // 獲取當前分類
         $currentCategory = Category::with('parent')->find($id);

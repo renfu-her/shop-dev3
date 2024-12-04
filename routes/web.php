@@ -35,8 +35,8 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
 
 // 註冊路由
-Route::get('/join', [JoinController::class, 'index'])->name('join');
-Route::post('/join', [JoinController::class, 'joinProcess'])->name('join.process');
+Route::get('/register', [JoinController::class, 'index'])->name('register');
+Route::post('/register', [JoinController::class, 'joinProcess'])->name('register.process');
 
 // 忘記密碼路由
 Route::get('/forget', [ForgetController::class, 'forget'])->name('forget');
@@ -66,14 +66,6 @@ Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
     Route::get('show/{id}', [ProductController::class, 'show'])->name('show');
 });
 
-// 印章知識路由
-Route::group(['prefix' => 'seal-knowledge', 'as' => 'seal-knowledge.'], function () {
-    Route::get('/', [SealKnowledgeController::class, 'index'])->name('index');
-    Route::get('/category/{id}', [SealKnowledgeCategoryController::class, 'show'])->name('category');
-    Route::get('/{id}', [SealKnowledgeController::class, 'show'])
-        ->where('id', '[0-9]+')
-        ->name('show');
-});
 
 // 驗證碼路由
 Route::get('/captcha', [CaptchaController::class, 'generate'])->name('captcha.generate');
