@@ -81,131 +81,6 @@
     </section>
     <!-- End Hero Area -->
 
-    <!-- Start Featured Categories Area -->
-    <section class="featured-categories section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>新品上市</h2>
-                        <p>新品上市是我們精心挑選的，保證品質和滿意度。</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">電視與音響</h3>
-                        <ul>
-                            <li><a href="product-grids.html">智慧電視</a></li>
-                            <li><a href="product-grids.html">QLED 電視</a></li>
-                            <li><a href="product-grids.html">音響</a></li>
-                            <li><a href="product-grids.html">耳機</a></li>
-                            <li><a href="product-grids.html">查看全部</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="{{ asset('frontend/assets/images/featured-categories/fetured-item-1.png') }}"
-                                alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">台式電腦與筆記型電腦</h3>
-                        <ul>
-                            <li><a href="product-grids.html">智慧電視</a></li>
-                            <li><a href="product-grids.html">QLED 電視</a></li>
-                            <li><a href="product-grids.html">音響</a></li>
-                            <li><a href="product-grids.html">耳機</a></li>
-                            <li><a href="product-grids.html">查看全部</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="{{ asset('frontend/assets/images/featured-categories/fetured-item-2.png') }}"
-                                alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">CCTV 攝影機</h3>
-                        <ul>
-                            <li><a href="product-grids.html">智慧電視</a></li>
-                            <li><a href="product-grids.html">QLED 電視</a></li>
-                            <li><a href="product-grids.html">音響</a></li>
-                            <li><a href="product-grids.html">耳機</a></li>
-                            <li><a href="product-grids.html">查看全部</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="{{ asset('frontend/assets/images/featured-categories/fetured-item-3.png') }}"
-                                alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">數位單反相機</h3>
-                        <ul>
-                            <li><a href="product-grids.html">智慧電視</a></li>
-                            <li><a href="product-grids.html">QLED 電視</a></li>
-                            <li><a href="product-grids.html">音響</a></li>
-                            <li><a href="product-grids.html">耳機</a></li>
-                            <li><a href="product-grids.html">查看全部</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="{{ asset('frontend/assets/images/featured-categories/fetured-item-4.png') }}"
-                                alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">智慧手機</h3>
-                        <ul>
-                            <li><a href="product-grids.html">智慧電視</a></li>
-                            <li><a href="product-grids.html">QLED 電視</a></li>
-                            <li><a href="product-grids.html">音響</a></li>
-                            <li><a href="product-grids.html">耳機</a></li>
-                            <li><a href="product-grids.html">查看全部</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="{{ asset('frontend/assets/images/featured-categories/fetured-item-5.png') }}"
-                                alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">遊戲主機</h3>
-                        <ul>
-                            <li><a href="product-grids.html">智慧電視</a></li>
-                            <li><a href="product-grids.html">QLED 電視</a></li>
-                            <li><a href="product-grids.html">音響</a></li>
-                            <li><a href="product-grids.html">耳機</a></li>
-                            <li><a href="product-grids.html">查看全部</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="{{ asset('frontend/assets/images/featured-categories/fetured-item-6.png') }}"
-                                alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Features Area -->
-
     <!-- Start Trending Product Area -->
     <section class="trending-product section">
         <div class="container">
@@ -218,243 +93,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-1.jpg') }}" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
+                @foreach ($hotProducts as $product)
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-product">
+                            <div class="product-image">
+                                <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
+                                <div class="button">
+                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">手錶</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$199.00</span>
+                            <div class="product-info">
+                                <span class="category">{{ $product->category->name }}</span>
+                                <h4 class="title">
+                                    <a href="product-grids.html">{{ $product->name }}</a>
+                                </h4>
+                                <div class="price">
+                                    <span>{{ $product->price }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-2.jpg') }}" alt="#">
-                            <span class="sale-tag">-25%</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">擴音器</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Big Power Sound Speaker</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$275.00</span>
-                                <span class="discount-price">$300.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-3.jpg') }}" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">相機</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">WiFi Security Camera</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$399.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-4.jpg') }}" alt="#">
-                            <span class="new-tag">新品</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">手機</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-5.jpg') }}" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">耳機</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Wireless Headphones</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$350.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-6.jpg') }}" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">擴音器</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Mini Bluetooth Speaker</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$70.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-7.jpg') }}" alt="#">
-                            <span class="sale-tag">-50%</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">耳機</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">PX7 Wireless Headphones</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$100.00</span>
-                                <span class="discount-price">$200.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/assets/images/products/product-8.jpg') }}" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">筆電</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Apple MacBook Air</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$899.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -512,8 +171,7 @@
                             <!-- Start Single Product -->
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="{{ asset('frontend/assets/images/products/product-3.jpg') }}"
-                                        alt="#">
+                                    <img src="{{ asset('frontend/assets/images/products/product-3.jpg') }}" alt="#">
                                     <div class="button">
                                         <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
                                             加入購物車</a>
@@ -543,8 +201,7 @@
                             <!-- Start Single Product -->
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="{{ asset('frontend/assets/images/products/product-8.jpg') }}"
-                                        alt="#">
+                                    <img src="{{ asset('frontend/assets/images/products/product-8.jpg') }}" alt="#">
                                     <div class="button">
                                         <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
                                             加入購物車</a>

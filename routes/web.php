@@ -62,8 +62,8 @@ Route::get('/faqs/{category?}', [FaqController::class, 'index'])->name('faqs.ind
 // 產品分類路由
 Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
-    Route::get('category/{id}', [ProductController::class, 'index'])->name('category');
-    Route::get('show/{id}', [ProductController::class, 'show'])->name('show');
+    Route::get('items/{id}', [ProductController::class, 'items'])->name('items');
+    Route::get('itemDetail/{id}', [ProductController::class, 'itemDetail'])->name('itemDetail');
 });
 
 

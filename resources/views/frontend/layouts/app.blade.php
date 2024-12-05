@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>ShopGrids - Bootstrap 5 電子商務 HTML 模板</title>
+    <title>電子商品 DEMO1</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="text/javascript" nonce="67cb4b75e8e246e98b1d345216b"
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/tiny-slider.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/glightbox.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}" />
+
+    @stack('css')
 
 </head>
 
@@ -99,18 +101,6 @@
                         <div class="main-menu-search">
                             <!-- navbar search start -->
                             <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>全部</option>
-                                            <option value="1">選項 01</option>
-                                            <option value="2">選項 02</option>
-                                            <option value="3">選項 03</option>
-                                            <option value="4">選項 04</option>
-                                            <option value="5">選項 05</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="search-input">
                                     <input type="text" placeholder="搜尋">
                                 </div>
@@ -202,7 +192,7 @@
                             <ul class="sub-category">
                                 @foreach (App\Models\Category::getMainCategories() as $category)
                                     <li>
-                                        <a href="{{ route('products.category', $category->id) }}">
+                                        <a href="{{ route('products.items', $category->id) }}">
                                             {{ $category->name }}
                                             @if ($category->children->count() > 0)
                                                 <i class="lni lni-chevron-right"></i>
@@ -212,8 +202,7 @@
                                             <ul class="inner-sub-category">
                                                 @foreach ($category->children as $childCategory)
                                                     <li>
-                                                        <a
-                                                            href="{{ route('products.category', $childCategory->id) }}">
+                                                        <a href="{{ route('products.items', $childCategory->id) }}">
                                                             {{ $childCategory->name }}
                                                         </a>
                                                     </li>
@@ -242,29 +231,12 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-2"
-                                            aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">頁面</a>
-                                        <ul class="sub-menu collapse" id="submenu-1-2">
-                                            <li class="nav-item"><a href="about-us.html">關於我們</a></li>
-                                            <li class="nav-item"><a href="faq.html">常見問題</a></li>
-                                            <li class="nav-item"><a href="login.html">登入</a></li>
-                                            <li class="nav-item"><a href="register.html">註冊</a></li>
-                                            <li class="nav-item"><a href="mail-success.html">郵件成功</a></li>
-                                            <li class="nav-item"><a href="404.html">404 錯誤</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="dd-menu collapsed" href="javascript:void(0)"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">商店</a>
+                                            aria-label="Toggle navigation">會員專區</a>
                                         <ul class="sub-menu collapse" id="submenu-1-3">
-                                            <li class="nav-item"><a href="product-grids.html">商品網格</a></li>
-                                            <li class="nav-item"><a href="product-list.html">商品列表</a></li>
-                                            <li class="nav-item"><a href="product-details.html">商品詳情</a></li>
-                                            <li class="nav-item"><a href="cart.html">購物車</a></li>
-                                            <li class="nav-item"><a href="checkout.html">結帳</a></li>
+                                            <li class="nav-item"><a href="{{ route('login') }}">登入</a></li>
+                                            <li class="nav-item"><a href="{{ route('register') }}">註冊</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
@@ -278,6 +250,9 @@
                                             <li class="nav-item"><a href="blog-single.html">部落格單頁</a></li>
                                             <li class="nav-item"><a href="blog-single-sidebar.html">部落格單頁側欄</a></li>
                                         </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" aria-label="Toggle navigation">常見問題</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="contact.html" aria-label="Toggle navigation">聯絡我們</a>
@@ -547,6 +522,9 @@
         timer();
         setInterval(timer, 1000);
     </script>
+
+    @stack('js')
+
 </body>
 
 </html>
