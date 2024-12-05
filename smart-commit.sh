@@ -38,13 +38,13 @@ if [ ! -z "$staged_files" ]; then
         commit_message="💄 樣式: 更新 $first_staged_file"
     # 檢查是否有控制器更新
     elif echo "$staged_files" | grep -q "app/Http/Controllers"; then
-        commit_message="🎮 Controller: 更新 $first_staged_file"
+        commit_message="🎮 控制器: 更新 $first_staged_file"
     # 檢查是否有模型更新
     elif echo "$staged_files" | grep -q "app/Models"; then
-        commit_message="📊 Model: 更新 $first_staged_file"
+        commit_message="📊 模型: 更新 $first_staged_file"
     # 檢查是否有視圖檔案更新
     elif echo "$staged_files" | grep -q "resources/views"; then
-        commit_message="🎨 View: 更新 $first_staged_file"
+        commit_message="🎨 視圖: 更新 $first_staged_file"
     else
         commit_message="🔨 更新: $first_staged_file"
     fi
