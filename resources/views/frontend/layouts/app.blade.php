@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css?v=' . time()) }}" />
 
-    @stack('css')
+    @stack('styles')
 
 </head>
 
@@ -524,7 +524,7 @@
         setInterval(timer, 1000);
     </script>
 
-    @stack('js')
+    @stack('scripts')
 
 </body>
 

@@ -412,7 +412,7 @@
     </section>
 @endsection
 
-@push('css')
+@push('styles')
     <style>
         .pagination-list {
             display: flex;

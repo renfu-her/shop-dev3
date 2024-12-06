@@ -44,8 +44,6 @@ class ProductController extends Controller
 
         $currentCategory = $product->category;
 
-
-        dd($product, $categories, $currentCategory, $id);
         return view('frontend.product.detail', compact(
             'product',
             'categories',
