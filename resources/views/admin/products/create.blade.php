@@ -95,10 +95,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="cash_price" class="form-label">優惠價</label>
-                                <input type="number" class="form-control @error('cash_price') is-invalid @enderror"
-                                    id="cash_price" name="cash_price" value="{{ old('cash_price') }}">
-                                @error('cash_price')
+                                <label for="special_price" class="form-label">優惠價</label>
+                                <input type="number" class="form-control @error('special_price') is-invalid @enderror"
+                                    id="special_price" name="special_price" value="{{ old('special_price') }}">
+                                @error('special_price')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

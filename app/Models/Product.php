@@ -27,10 +27,11 @@ class Product extends Model
         'is_new',
         'is_hot',
         'meta_title',
-        'meta_description'      ,
+        'meta_description',
         'meta_keywords',
         'content',
-        'is_sale'
+        'is_sale',
+        'special_price'
     ];
 
     protected $casts = [

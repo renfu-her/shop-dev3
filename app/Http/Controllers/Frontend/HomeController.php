@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->where('is_active', 1)
             ->where('is_hot', 1)
             ->orderByDesc('created_at')
-            ->limit(6)
+            ->limit(8)
             ->get();
 
         $now = Carbon::now();
@@ -51,7 +51,14 @@ class HomeController extends Controller
             ->orderByDesc('id')
             ->get();
 
-        return view('frontend.home', compact('actives', 'hotProducts', 'ads', 'homeAds'));
+        $specialProducts = Product::with('primaryImage')
+            ->where('is_active', 1)
+            ->where('special_price', '>', 0)
+            ->orderByDesc('created_at')
+            ->limit(8)
+            ->get();
+
+        return view('frontend.home', compact('actives', 'hotProducts', 'ads', 'homeAds', 'specialProducts'));
     }
 
     public function memberAgreement()

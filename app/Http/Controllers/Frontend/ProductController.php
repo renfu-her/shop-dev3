@@ -6,36 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
+    protected $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function items($id = null)
     {
-        // 獲取當前分類
-        $currentCategory = Category::with('parent')->find($id);
+        // 從 service 獲取數據
+        $data = $this->productService->items($id);
 
-        // 獲取所有頂層分類及其子分類
-        $categories = Category::where('parent_id', $currentCategory->parent_id)
-            ->with(['children' => function ($query) {
-                $query->orderBy('name');
-                $query->with(['children' => function ($q) {
-                    $q->orderBy('name');
-                }]);
-            }])
-            ->orderBy('sort_order', 'asc')
-            ->get();
-
-        // 獲取當前分類的產品，並確保加載主圖
-        $products = Product::where('category_id', $id)
-            ->with('primaryImage')
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
-
-        return view('frontend.product.items', compact(
-            'currentCategory',
-            'categories',
-            'products'
-        ));
+        return view('frontend.product.items', $data);
     }
 
     public function itemDetail($id)
@@ -57,6 +44,8 @@ class ProductController extends Controller
 
         $currentCategory = $product->category;
 
+
+        dd($product, $categories, $currentCategory, $id);
         return view('frontend.product.detail', compact(
             'product',
             'categories',

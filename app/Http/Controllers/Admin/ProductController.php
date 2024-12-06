@@ -66,6 +66,7 @@ class ProductController extends Controller
             'meta_description' => 'nullable|string|max:160',
             'meta_keywords' => 'nullable|string|max:255',
             'content' => 'required|string',
+            'special_price' => 'nullable|numeric|min:0',    
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -113,6 +114,7 @@ class ProductController extends Controller
             'meta_description' => 'nullable|string|max:160',
             'meta_keywords' => 'nullable|string|max:255',
             'content' => 'nullable|string',
+            'special_price' => 'nullable|numeric|min:0',
         ]);
 
         if (isset($validated['name'])) {

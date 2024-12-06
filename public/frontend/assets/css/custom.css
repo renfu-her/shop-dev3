@@ -1,0 +1,5 @@
+.special-price {
+    text-decoration: line-through;
+    font-size: 14px !important;
+    color: #999 !important;
+}

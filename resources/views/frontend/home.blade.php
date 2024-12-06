@@ -99,7 +99,8 @@
                             <div class="product-image">
                                 <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
+                                    <a href="{{ route('products.itemDetail', $product->id) }}" class="btn"><i
+                                            class="lni lni-cart"></i> 加入購物車</a>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -107,8 +108,15 @@
                                 <h4 class="title">
                                     <a href="product-grids.html">{{ $product->name }}</a>
                                 </h4>
+
                                 <div class="price">
-                                    <span>{{ $product->price }}</span>
+                                    @if ($product->special_price > 0)
+                                        <span class="special-price">原價：{{ $product->price }}</span><br>
+                                        <span>優惠價：{{ $product->special_price }}</span>
+                                    @else
+                                        <span class="special-price"></span><br>
+                                        <span>原價：{{ $product->price }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -160,169 +168,47 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>特別優惠</h2>
-                        <p>Lorem Ipsum 的變體有許多種，但大多數都經歷了某種形式的改變。</p>
+                        <p>特別優惠商品，請把握機會購買。</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-12">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-12">
-                            <!-- Start Single Product -->
-                            <div class="single-product">
-                                <div class="product-image">
-                                    <img src="{{ asset('frontend/assets/images/products/product-3.jpg') }}" alt="#">
-                                    <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
-                                            加入購物車</a>
+                        @foreach ($specialProducts as $product)
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <!-- Start Single Product -->
+                                <div class="single-product">
+                                    <div class="product-image">
+                                        <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
+                                        <div class="button">
+                                            <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                                加入購物車</a>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <span class="category">{{ $product->category->name }}</span>
+                                        <h4 class="title">
+                                            <a href="product-grids.html">{{ $product->name }}</a>
+                                        </h4>
+                                        <div class="price">
+                                            @if ($product->special_price > 0)
+                                                <span class="special-price">原價：{{ $product->price }}</span><br>
+                                                <span>優惠價：{{ $product->special_price }}</span>
+                                            @else
+                                                <span class="special-price"></span><br>
+                                                <span>原價：{{ $product->price }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-info">
-                                    <span class="category">相機</span>
-                                    <h4 class="title">
-                                        <a href="product-grids.html">WiFi Security Camera</a>
-                                    </h4>
-                                    <ul class="review">
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><span>5.0 評價</span></li>
-                                    </ul>
-                                    <div class="price">
-                                        <span>$399.00</span>
-                                    </div>
-                                </div>
+                                <!-- End Single Product -->
                             </div>
-                            <!-- End Single Product -->
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                            <!-- Start Single Product -->
-                            <div class="single-product">
-                                <div class="product-image">
-                                    <img src="{{ asset('frontend/assets/images/products/product-8.jpg') }}" alt="#">
-                                    <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
-                                            加入購物車</a>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <span class="category">筆電</span>
-                                    <h4 class="title">
-                                        <a href="product-grids.html">Apple MacBook Air</a>
-                                    </h4>
-                                    <ul class="review">
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><span>5.0 評價</span></li>
-                                    </ul>
-                                    <div class="price">
-                                        <span>$899.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Product -->
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                            <!-- Start Single Product -->
-                            <div class="single-product">
-                                <div class="product-image">
-                                    <img src="{{ asset('frontend/assets/images/products/product-6.jpg') }}"
-                                        alt="#">
-                                    <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
-                                            加入購物車</a>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <span class="category">擴音器</span>
-                                    <h4 class="title">
-                                        <a href="product-grids.html">Bluetooth Speaker</a>
-                                    </h4>
-                                    <ul class="review">
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star-filled"></i></li>
-                                        <li><i class="lni lni-star"></i></li>
-                                        <li><span>4.0 評價</span></li>
-                                    </ul>
-                                    <div class="price">
-                                        <span>$70.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Product -->
-                        </div>
-                    </div>
-                    <!-- Start Banner -->
-                    <div class="single-banner right"
-                        style="background-image:url('{{ asset('frontend/assets/images/banner/banner-3-bg.jpg') }}');margin-top: 30px;">
-                        <div class="content">
-                            <h2>Samsung Notebook 9 </h2>
-                            <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
-                                incididunt ut labore.</p>
-                            <div class="price">
-                                <span>$590.00</span>
-                            </div>
-                            <div class="button">
-                                <a href="product-grids.html" class="btn">立即購買</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Banner -->
-                </div>
-                <div class="col-lg-4 col-md-12 col-12">
-                    <div class="offer-content">
-                        <div class="image">
-                            <img src="{{ asset('frontend/assets/images/offer/offer-image.jpg') }}" alt="#">
-                            <span class="sale-tag">-50%</span>
-                        </div>
-                        <div class="text">
-                            <h2><a href="product-grids.html">Bluetooth Headphone</a></h2>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 評價</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$200.00</span>
-                                <span class="discount-price">$400.00</span>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry incididunt ut
-                                eiusmod tempor labores.</p>
-                        </div>
-                        <div class="box-head">
-                            <div class="box">
-                                <h1 id="days">000</h1>
-                                <h2 id="daystxt">天</h2>
-                            </div>
-                            <div class="box">
-                                <h1 id="hours">00</h1>
-                                <h2 id="hourstxt">小時</h2>
-                            </div>
-                            <div class="box">
-                                <h1 id="minutes">00</h1>
-                                <h2 id="minutestxt">分鐘</h2>
-                            </div>
-                            <div class="box">
-                                <h1 id="seconds">00</h1>
-                                <h2 id="secondstxt">秒</h2>
-                            </div>
-                        </div>
-                        <div style="background: rgb(204, 24, 24);" class="alert">
-                            <h1 style="padding: 50px 80px;color: white;">很抱歉，活動已結束！ </h1>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!-- End Special Offer -->
