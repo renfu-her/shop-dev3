@@ -50,7 +50,6 @@ class CartController extends Controller
     public function addToCart(Request $request, $redirect = true)
     {
 
-
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
             'spec_id' => 'required|exists:product_specs,id',

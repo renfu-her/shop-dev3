@@ -24,7 +24,7 @@
                         <form id="addToCartForm" action="{{ route('cart.add') }}" method="post">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <input type="hidden" name="checkout_direct" value="1">
+                            <input type="hidden" name="checkout_direct" value="0">
                             <div class="product-info">
                                 <h2 class="title">{{ $product->name }}</h2>
                                 <p class="category"><i class="lni lni-tag"></i> {{ $product->category->name }}
@@ -46,7 +46,7 @@
                                             <select class="form-control" id="spec_id" name="spec_id">
                                                 <option value="">請選擇規格</option>
                                                 @foreach ($specs as $spec)
-                                                    <option value="{{ $spec->id }}" name="spec_id"
+                                                    <option value="{{ $spec->id }}"
                                                         data-price="{{ number_format($product->special_price ?? number_format($product->price)) }}"
                                                         data-special-price="{{ number_format($spec->price) }}">
                                                         {{ $spec->name }}
@@ -77,14 +77,15 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <div class="button cart-button">
-                                                <button class="btn" style="width: 100%;" type="submit">
+                                                <button class="btn" style="width: 100%;" type="button"
+                                                    id="checkoutButton">
                                                     直接購買
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <div class="wish-button">
-                                                <button class="btn" type="button" onclick="addToCart()">
+                                                <button class="btn" type="button">
                                                     <i class="fas fa-shopping-cart"></i>
                                                     加入購物車
                                                 </button>
@@ -115,35 +116,9 @@
 
 @push('scripts')
     <script>
-        function changeImage(element) {
-            let current = document.getElementById('current');
-            current.src = element.src;
-        }
-
-        // 更新規格選擇的價格顯示
-        document.getElementById('spec').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            if (selectedOption.value === "") {
-                return;
-            }
-            const priceElement = document.querySelector('.price');
-
-            const price = selectedOption.dataset.price;
-            const specialPrice = selectedOption.dataset.specialPrice;
-            console.log(price, specialPrice);
-
-            if (specialPrice && specialPrice !== "") {
-                priceElement.innerHTML =
-                    `${specialPrice} <span style="text-decoration: line-through;">${price}</span>`;
-            } else {
-                priceElement.innerHTML = price;
-            }
-        });
-
-        $(document).ready(function() {
-            $('#addToCartForm').submit(function() {
-                console.log('submit');
-                const spec = $('#spec').val();
+        $(function() {
+            $('#checkoutButton').click(function() {
+                const spec = $('#spec_id').val();
                 const quantity = $('#quantity').val();
                 console.log(spec, quantity);
 
@@ -152,7 +127,38 @@
                     return false;
                 }
 
+                $('#addToCartForm').submit();
+            });
+
+            // 更新規格選擇的價格顯示
+            $('#spec_id').change(function() {
+                const selectedOption = $(this).find('option:selected');
+                if (selectedOption.val() === "") {
+                    return;
+                }
+                const priceElement = $('.price');
+
+                const price = selectedOption.data('price');
+                const specialPrice = selectedOption.data('special-price');
+                console.log(price, specialPrice);
+
+                if (specialPrice && specialPrice !== "") {
+                    priceElement.html(
+                        `${specialPrice} <span style="text-decoration: line-through;">${price}</span>`
+                    );
+                } else {
+                    priceElement.html(price);
+                }
             });
         });
+
+        function changeImage(element) {
+            let current = document.getElementById('current');
+            current.src = element.src;
+        }
+
+        function addToCart() {
+            $('#addToCartForm').submit();
+        }
     </script>
 @endpush
