@@ -13,7 +13,8 @@
                                 </div>
                                 <div class="images">
                                     @foreach ($product->images as $image)
-                                        <img src="{{ $image->image_url }}" class="img" onclick="changeImage(this)" alt="#">
+                                        <img src="{{ $image->image_url }}" class="img" onclick="changeImage(this)"
+                                            alt="#">
                                     @endforeach
                                 </div>
                             </main>
@@ -26,75 +27,63 @@
                                 <a href="javascript:void(0)">{{ $product->category->parent->name }}</a>
                             </p>
                             @if ($product->special_price)
-                                <h3 class="price">{{ $product->special_price }}
-                                    <span>{{ $product->price }}</span>
+                                <h3 class="price">優惠價：{{ number_format($product->special_price) }}
+                                    <span>原價：{{ number_format($product->price) }}</span>
                                 </h3>
                             @else
-                                <h3 class="price">{{ $product->price }}</h3>
+                                <h3 class="price">價格：{{ number_format($product->price) }}</h3>
                             @endif
                             <p class="info-text">{{ $product->sub_title }}</p>
                             <div class="row">
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group color-option">
-                                        <label class="title-label" for="size">Choose color</label>
-                                        <div class="single-checkbox checkbox-style-1">
-                                            <input type="checkbox" id="checkbox-1" checked="">
-                                            <label for="checkbox-1"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-2">
-                                            <input type="checkbox" id="checkbox-2">
-                                            <label for="checkbox-2"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-3">
-                                            <input type="checkbox" id="checkbox-3">
-                                            <label for="checkbox-3"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-4">
-                                            <input type="checkbox" id="checkbox-4">
-                                            <label for="checkbox-4"><span></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-12">
+
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="color">Battery capacity</label>
-                                        <select class="form-control" id="color">
-                                            <option>5100 mAh</option>
-                                            <option>6200 mAh</option>
-                                            <option>8000 mAh</option>
+                                        <label for="color">規格：</label>
+                                        <select class="form-control" id="spec" name="spec">
+                                            <option value="">請選擇規格</option>
+                                            @foreach ($specs as $spec)
+                                                <option value="{{ $spec->id }}" data-price="{{ number_format($product->special_price ?? number_format($product->price)) }}"
+                                                    data-special-price="{{ number_format($spec->price) }}">
+                                                    {{ $spec->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group quantity">
-                                        <label for="color">Quantity</label>
+                                        <label for="color">數量：</label>
                                         <select class="form-control">
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
                                             <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="bottom-content">
                                 <div class="row align-items-end">
-                                    <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="col-lg-6 col-md-6 col-12">
                                         <div class="button cart-button">
-                                            <button class="btn" style="width: 100%;">Add to Cart</button>
+                                            <button class="btn" style="width: 100%;">直接購買</button>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="col-lg-6 col-md-6 col-12">
                                         <div class="wish-button">
-                                            <button class="btn"><i class="lni lni-reload"></i> Compare</button>
+                                            <button class="btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                加入購物車
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div class="wish-button">
-                                            <button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -104,40 +93,10 @@
             <div class="product-details-info">
                 <div class="single-block">
                     <div class="row">
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-12 col-12">
                             <div class="info-body custom-responsive-margin">
-                                <h4>Details</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</p>
-                                <h4>Features</h4>
-                                <ul class="features">
-                                    <li>Capture 4K30 Video and 12MP Photos</li>
-                                    <li>Game-Style Controller with Touchscreen</li>
-                                    <li>View Live Camera Feed</li>
-                                    <li>Full Control of HERO6 Black</li>
-                                    <li>Use App for Dedicated Camera Operation</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="info-body">
-                                <h4>Specifications</h4>
-                                <ul class="normal-list">
-                                    <li><span>Weight:</span> 35.5oz (1006g)</li>
-                                    <li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>
-                                    <li><span>Maximum Distance:</span> Up to 9,840ft (3,000m)</li>
-                                    <li><span>Operating Frequency:</span> 2.4GHz</li>
-                                    <li><span>Manufacturer:</span> GoPro, USA</li>
-                                </ul>
-                                <h4>Shipping Options:</h4>
-                                <ul class="normal-list">
-                                    <li><span>Courier:</span> 2 - 4 days, $22.50</li>
-                                    <li><span>Local Shipping:</span> up to one week, $10.00</li>
-                                    <li><span>UPS Ground Shipping:</span> 4 - 6 days, $18.00</li>
-                                    <li><span>Unishop Global Export:</span> 3 - 4 days, $25.00</li>
-                                </ul>
+                                <h4>商品介紹</h4>
+                                <p>{!! $product->content !!}</p>
                             </div>
                         </div>
                     </div>
@@ -153,5 +112,24 @@
             let current = document.getElementById('current');
             current.src = element.src;
         }
+
+        // 更新規格選擇的價格顯示
+        document.getElementById('spec').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value === "") {
+                return;
+            }
+            const priceElement = document.querySelector('.price');
+            
+            const price = selectedOption.dataset.price;
+            const specialPrice = selectedOption.dataset.specialPrice;
+            console.log(price, specialPrice);
+
+            if (specialPrice && specialPrice !== "") {
+                priceElement.innerHTML = `${specialPrice} <span style="text-decoration: line-through;">${price}</span>`;
+            } else {
+                priceElement.innerHTML = price;
+            }
+        });
     </script>
 @endpush

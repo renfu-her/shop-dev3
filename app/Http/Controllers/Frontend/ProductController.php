@@ -44,10 +44,13 @@ class ProductController extends Controller
 
         $currentCategory = $product->category;
 
+        $specs = $product->specs;
+
         return view('frontend.product.detail', compact(
             'product',
             'categories',
-            'currentCategory'
+            'currentCategory',
+            'specs'
         ));
     }
 }

@@ -62,3 +62,13 @@
 .single-product .title {
     height: 80px;
 }
+
+.item-details .product-info .price span {
+    font-size: 16px !important;
+    color: #999 !important;
+}
+
+.item-details .product-info .info-text {
+    font-size: 16px !important;
+    color: #333 !important;
+}
