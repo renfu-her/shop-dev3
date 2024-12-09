@@ -203,8 +203,15 @@
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">會員專區</a>
                                         <ul class="sub-menu collapse" id="submenu-1-3">
-                                            <li class="nav-item"><a href="{{ route('login') }}">登入</a></li>
-                                            <li class="nav-item"><a href="{{ route('register') }}">註冊</a></li>
+                                            @if (Auth::guard('member')->check())
+                                                <li class="nav-item"><a href="{{ route('profile.index') }}">會員資料</a></li>
+                                                <li class="nav-item"><a href="{{ route('orders.list') }}">訂單列表</a></li>
+                                                <li class="nav-item"><a href="{{ route('logout') }}">登出</a></li>
+                                            @else
+                                                <li class="nav-item"><a href="{{ route('login') }}">登入</a></li>
+                                                <li class="nav-item"><a href="{{ route('register') }}">註冊</a></li>
+                                                <li class="nav-item"><a href="{{ route('forget') }}">忘記密碼</a></li>
+                                            @endif
                                         </ul>
                                     </li>
                                     <li class="nav-item">

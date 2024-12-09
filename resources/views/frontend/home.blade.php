@@ -5,7 +5,7 @@
     <section class="hero-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-12 custom-padding-right">
+                <div class="col-lg-12 col-12 custom-padding-right">
                     <div class="slider-head">
                         <!-- Start Hero Slider -->
                         <div class="hero-slider">
@@ -43,37 +43,6 @@
                             <!-- End Single Slider -->
                         </div>
                         <!-- End Hero Slider -->
-                    </div>
-                </div>
-                <div class="col-lg-4 col-12">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
-                            <!-- Start Small Banner -->
-                            <div class="hero-small-banner"
-                                style="background-image: url({{ asset('frontend/assets/images/hero/slider-bnr.jpg') }});">
-                                <div class="content">
-                                    <h2>
-                                        <span>需要新行</span>
-                                        iPhone 12 Pro Max
-                                    </h2>
-                                    <h3>$259.99</h3>
-                                </div>
-                            </div>
-                            <!-- End Small Banner -->
-                        </div>
-                        <div class="col-lg-12 col-md-6 col-12">
-                            <!-- Start Small Banner -->
-                            <div class="hero-small-banner style2">
-                                <div class="content">
-                                    <h2>本週特賣！</h2>
-                                    <p>本週所有線上商品最高可省下 50%。</p>
-                                    <div class="button">
-                                        <a class="btn" href="product-grids.html">立即購買</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Small Banner -->
-                        </div>
                     </div>
                 </div>
             </div>
