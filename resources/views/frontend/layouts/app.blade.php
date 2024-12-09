@@ -214,7 +214,7 @@
                                             @endif
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-4"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -225,12 +225,12 @@
                                             <li class="nav-item"><a href="blog-single.html">部落格單頁</a></li>
                                             <li class="nav-item"><a href="blog-single-sidebar.html">部落格單頁側欄</a></li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a href="#" aria-label="Toggle navigation">常見問題</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="contact.html" aria-label="Toggle navigation">聯絡我們</a>
+                                        <a href="{{ route('contact') }}" aria-label="Toggle navigation">聯絡我們</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->

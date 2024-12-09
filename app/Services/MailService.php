@@ -16,9 +16,9 @@ class MailService
     public function send($to, string $subject, $content, ?string $template = null, array $data = []): bool
     {
         // 獲取所有啟用的郵件設定
-        $bccEmails = EmailSetting::where('is_active', true)
-            ->pluck('email')
-            ->toArray();
+        // $bccEmails = EmailSetting::where('is_active', true)
+        //     ->pluck('email')
+        //     ->toArray();
 
         // 處理收件者格式
         $recipients = is_array($to) ? $to : ['email' => $to];
@@ -30,21 +30,15 @@ class MailService
         // 如果沒有指定模板，使用預設模板
         $view = $template ?? 'emails.default';
 
-        // try {
-            // 發送郵件，並加入密件副本
-            Mail::to($recipients)
-                ->bcc($bccEmails)
-                ->send(new GenericMail(
-                    $subject,
-                    $view,
-                    $mailData
-                ));
+        Mail::to($recipients)
+            // ->bcc($bccEmails)
+            ->send(new GenericMail(
+                $subject,
+                $view,
+                $mailData
+            ));
 
-            return true;
-        // } catch (\Exception $e) {
-        //     Log::error('郵件發送失敗：' . $e->getMessage());
-        //     return false;
-        // }
+        return true;
     }
 
     /**

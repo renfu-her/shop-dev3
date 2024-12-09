@@ -17,6 +17,7 @@ use App\Http\Controllers\Frontend\{
     SearchController,
     ForgetController,
     NavigationController,
+    ContactController,
 };
 use App\Http\Controllers\Frontend\{
     CartController,
@@ -58,6 +59,10 @@ Route::get('/activity/{id}', [ActivityController::class, 'detail'])->name('activ
 
 // 常見問題路由
 Route::get('/faqs/{category?}', [FaqController::class, 'index'])->name('faqs.index');
+
+// 聯絡我們路由
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 // 產品分類路由
 Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
