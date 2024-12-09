@@ -4,7 +4,7 @@
     <section class="item-details section">
         <div class="container">
             <div class="top-area">
-                <div class="row align-items-center">
+                <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-images">
                             <main id="gallery">

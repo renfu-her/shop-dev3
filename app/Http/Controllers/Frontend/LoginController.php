@@ -12,7 +12,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        return view('frontend.login.index');
+        return view('frontend.auth.login');
     }
 
     public function loginProcess(Request $request)

@@ -28,7 +28,7 @@ class JoinController extends Controller
 
     public function index()
     {
-        return view('frontend.join.index');
+        return view('frontend.auth.register');
     }
 
     public function joinProcess(Request $request)
