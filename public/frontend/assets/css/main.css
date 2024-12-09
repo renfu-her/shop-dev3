@@ -129,6 +129,7 @@ img,
 svg,
 video {
   vertical-align: middle;
+  overflow: clip;
 }
 
 img {
