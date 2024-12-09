@@ -49,6 +49,8 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $redirect = true)
     {
+
+
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
             'spec_id' => 'required|exists:product_specs,id',
@@ -74,11 +76,10 @@ class CartController extends Controller
         ];
 
         session()->put('cart', $cart);
+        // // 廣播購物車數量更新事件
+        // broadcast(new CartUpdated(count($cart)));
 
-        // 廣播購物車數量更新事件
-        broadcast(new CartUpdated(count($cart)));
-
-        // 根據 checkout_direct 參數決定跳轉
+        // 據 checkout_direct 參數決定跳轉
         if ($request->boolean('checkout_direct')) {
             return redirect()->route('checkout.index');
         }
@@ -120,7 +121,7 @@ class CartController extends Controller
         // 廣播購物車數量更新事件
         broadcast(new CartUpdated(count($cart)));
 
-        // 根据 checkout_direct 参数决定跳转
+        // 根据 checkout_direct 参数決定跳转
         if ($request->boolean('checkout_direct')) {
             return redirect()->route('checkout');
         }
@@ -128,45 +129,38 @@ class CartController extends Controller
         return redirect()->back()->with('success', '商品已加入購物車');
     }
 
-    public function update(Request $request, CartItem $item)
+    public function update(Request $request)
     {
+
         $request->validate([
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
+            'item_id' => 'required|integer',
         ]);
 
-        if ($item->cart->user_id !== Auth::guard('member')->id()) {
-            abort(403);
-        }
+        $cart = session()->get('cart', []);
+        $item = $cart[$request->item_id];
 
-        $item->update([
-            'quantity' => $request->quantity
-        ]);
+        $item['quantity'] = $request->quantity;
+        session()->put('cart', $cart);
 
         return response()->json([
             'success' => true,
             'message' => '數量已更新',
-            'total' => number_format($item->price * $item->quantity)
+            'total' => number_format($item['price'] * $item['quantity'])
         ]);
     }
 
     public function remove(Request $request)
     {
         $validated = $request->validate([
-            'product_id' => 'required',
-            'spec_id' => 'required'
+            'item_id' => 'required|integer',
         ]);
 
         $cart = session()->get('cart', []);
 
-        // 找到要删除的商品索引
-        $itemIndex = array_search(true, array_map(function ($item) use ($validated) {
-            return $item['product_id'] == $validated['product_id'] &&
-                $item['spec_id'] == $validated['spec_id'];
-        }, $cart));
-
-        if ($itemIndex !== false) {
-            // 删除该商品
-            array_splice($cart, $itemIndex, 1);
+        // 使用 item_id 作为索引来删除商品
+        if (isset($cart[$validated['item_id']])) {
+            unset($cart[$validated['item_id']]);
             session()->put('cart', $cart);
 
             return response()->json([
@@ -221,35 +215,29 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        try {
-            $cartKey = $request->input('cart_key');
-            $productId = $request->input('product_id');
-            $specId = $request->input('spec_id');
-            $quantity = $request->input('quantity');
 
-            // 獲取購物車內容
-            $cart = session()->get('cart', []);
+        $itemId = $request->input('item_id');
+        $quantity = $request->input('quantity');
 
-            // 更新數量
-            if (isset($cart[$cartKey])) {
-                $cart[$cartKey]['quantity'] = $quantity;
+        // 獲取購物車內容
+        $cart = session()->get('cart', []);
+
+        // 查找對應商品並更新數量
+        foreach ($cart as $key => $item) {
+            if ($key == $itemId) {
+                $cart[$key]['quantity'] = $quantity;
                 session()->put('cart', $cart);
 
                 return response()->json([
                     'success' => true,
-                    'message' => '數量更新成功'
+                    'message' => '數量已更新'
                 ]);
             }
-
-            return response()->json([
-                'success' => false,
-                'message' => '找不到該商品'
-            ], 404);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => '更新失敗'
-            ], 500);
         }
+
+        return response()->json([
+            'success' => false,
+            'message' => '找不到該商品'
+        ], 404);
     }
 }

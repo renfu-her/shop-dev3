@@ -7,14 +7,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Cart</h1>
+                        <h1 class="page-title">購物車</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
-                        <li><a href="index.html">Shop</a></li>
-                        <li>Cart</li>
+                        <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> 首頁</a></li>
+                        <li>購物車</li>
                     </ul>
                 </div>
             </div>
@@ -22,7 +21,7 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shopping Cart -->
+    <!-- Start Shopping Cart -->
     <div class="shopping-cart section">
         <div class="container">
             <div class="cart-list-head">
@@ -30,174 +29,173 @@
                 <div class="cart-list-title">
                     <div class="row">
                         <div class="col-lg-1 col-md-1 col-12">
+                            <p>商品圖片</p>
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-12">
+                            <p>商品名稱</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-12">
+                            <p>單價</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-12">
+                            <p>數量</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-12">
+                            <p>小計</p>
+                        </div>
+                        <div class="col-lg-1 col-md-2 col-12">
+                            <p>移除</p>
+                        </div>
+                    </div>
+                </div>
 
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <p>Product Name</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>Quantity</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>Subtotal</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>Discount</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <p>Remove</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Cart List Title -->
-                <!-- Cart Single List list -->
-                <div class="cart-single-list">
-                    <div class="row align-items-center">
-                        <div class="col-lg-1 col-md-1 col-12">
-                            <a href="product-details.html"><img src="assets/images/cart/01.jpg" alt="#"></a>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <h5 class="product-name"><a href="product-details.html">
-                                    Canon EOS M50 Mirrorless Camera</a></h5>
-                            <p class="product-des">
-                                <span><em>Type:</em> Mirrorless</span>
-                                <span><em>Color:</em> Black</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <div class="count-input">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                <!-- Cart Single List -->
+                @forelse($cart as $key =>$item)
+                    <div class="cart-single-list">
+                        <div class="row align-items-center">
+                            <div class="col-lg-1 col-md-1 col-12">
+                                <a href="{{ route('products.itemDetail', $item['product_id']) }}">
+                                    <img src="{{ $item['primary_image'] }}" alt="{{ $item['product_name'] }}">
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-12">
+                                <h5 class="product-name">
+                                    <a href="{{ route('products.itemDetail', $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                                </h5>
+                                <p class="product-des">
+                                    <span>規格：{{ $item['spec_name'] }}</span>
+                                </p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <div class="count-input">
+                                    <p class="price">NT${{ number_format($item['price']) }}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <div class="count-input">
+                                    <select class="form-control quantity-select" data-item-id="{{ $key }}">
+                                        @for ($i = 1; $i <= 10; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ $item['quantity'] == $i ? 'selected' : '' }}>
+                                                {{ $i }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <p class="total-amount">NT${{ number_format($item['price'] * $item['quantity']) }}</p>
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-12">
+                                <a href="javascript:void(0)" class="remove-item" data-item-id="{{ $key }}">
+                                    <i class="lni lni-close"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$910.00</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$29.00</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                        </div>
                     </div>
-                </div>
-                <!-- End Single List list -->
-                <!-- Cart Single List list -->
-                <div class="cart-single-list">
-                    <div class="row align-items-center">
-                        <div class="col-lg-1 col-md-1 col-12">
-                            <a href="product-details.html"><img src="assets/images/cart/02.jpg" alt="#"></a>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <h5 class="product-name"><a href="product-details.html">
-                                    Apple iPhone X 256 GB Space Gray</a></h5>
-                            <p class="product-des">
-                                <span><em>Memory:</em> 256 GB</span>
-                                <span><em>Color:</em> Space Gray</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <div class="count-input">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                @empty
+                    <div class="cart-single-list">
+                        <div class="row">
+                            <div class="col-12 text-center py-4">
+                                <p>購物車是空的</p>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$1100.00</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>—</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                        </div>
                     </div>
-                </div>
-                <!-- End Single List list -->
-                <!-- Cart Single List list -->
-                <div class="cart-single-list">
-                    <div class="row align-items-center">
-                        <div class="col-lg-1 col-md-1 col-12">
-                            <a href="product-details.html"><img src="assets/images/cart/03.jpg" alt="#"></a>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <h5 class="product-name"><a href="product-details.html">HP LaserJet Pro Laser Printer</a></h5>
-                            <p class="product-des">
-                                <span><em>Type:</em> Laser</span>
-                                <span><em>Color:</em> White</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <div class="count-input">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$550.00</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>—</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single List list -->
+                @endforelse
             </div>
+
+            <!-- Start Total Amount -->
             <div class="row">
                 <div class="col-12">
-                    <!-- Total Amount -->
                     <div class="total-amount">
                         <div class="row">
                             <div class="col-lg-8 col-md-6 col-12">
                                 <div class="left">
                                     <div class="coupon">
-                                        <form action="#" target="_blank">
-                                            <input name="Coupon" placeholder="Enter Your Coupon">
-                                            <div class="button">
-                                                <button class="btn">Apply Coupon</button>
-                                            </div>
-                                        </form>
+                                        <a href="{{ route('products.index') }}" class="btn btn-alt">
+                                            <i class="lni lni-arrow-left"></i> 繼續購物
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span>$2560.00</span></li>
-                                        <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$29.00</span></li>
-                                        <li class="last">You Pay<span>$2531.00</span></li>
+                                        <li>小計<span>NT${{ number_format($total) }}</span></li>
+                                        <li>運費<span>{{ $shippingFee > 0 ? 'NT$' . number_format($shippingFee) : '免運' }}</span>
+                                        </li>
+                                        <li class="last">總計<span>NT${{ number_format($total + $shippingFee) }}</span>
+                                        </li>
                                     </ul>
                                     <div class="button">
-                                        <a href="checkout.html" class="btn">Checkout</a>
-                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
+                                        <a href="{{ route('checkout.index') }}" class="btn">前往結帳</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--/ End Total Amount -->
                 </div>
             </div>
+            <!-- End Total Amount -->
         </div>
     </div>
-    <!--/ End Shopping Cart -->
+    <!-- End Shopping Cart -->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // 更新數量
+            $('.quantity-select').change(function() {
+                const itemId = $(this).data('item-id');
+                const quantity = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('cart.update-quantity') }}',
+                    method: 'POST',
+                    data: {
+                        item_id: itemId,
+                        quantity: quantity,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            window.showToast(response.message);
+                        }
+                    },
+                    error: function() {
+                        window.showToast('更新失敗');
+                    }
+                });
+            });
+
+            // 刪除商品
+            $('.remove-item').click(function() {
+                const itemId = $(this).data('item-id');
+
+                if (confirm('確定要移除此商品？')) {
+                    $.ajax({
+                        url: '{{ route('cart.remove') }}',
+                        method: 'POST',
+                        data: {
+                            item_id: itemId,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                window.location.reload();
+                            } else {
+                                window.showToast(response.message);
+                            }
+                        },
+                        error: function() {
+                            window.showToast('移除失敗');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

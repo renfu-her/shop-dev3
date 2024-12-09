@@ -50,8 +50,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('get.logout');
 // 文章路由
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
-// 產品路由
-Route::get('/product/{id}', [ProductController::class, 'index'])->name('product.index');
 
 // 活動訊息路由
 Route::get('/activity', [ActivityController::class, 'index'])->name('activity.index');

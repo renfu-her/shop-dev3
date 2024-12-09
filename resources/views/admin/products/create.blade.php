@@ -63,8 +63,8 @@
 
                             <div class="mb-3">
                                 <label for="sub_title" class="form-label">副標題</label>
-                                <input type="text" class="form-control @error('sub_title') is-invalid @enderror"
-                                    id="sub_title" name="sub_title" value="{{ old('sub_title') }}">
+                                <textarea class="form-control @error('sub_title') is-invalid @enderror" id="sub_title"
+                                    name="sub_title" rows="3">{{ old('sub_title') }}</textarea>
                                 @error('sub_title')
                                     <div class="invalid-feedback">
                                         {{ $message }}

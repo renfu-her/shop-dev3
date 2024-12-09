@@ -7,14 +7,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">checkout</h1>
+                        <h1 class="page-title">結帳</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
-                        <li><a href="index.html">Shop</a></li>
-                        <li>checkout</li>
+                        <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> 首頁</a></li>
+                        <li>結帳</li>
                     </ul>
                 </div>
             </div>
@@ -22,356 +21,235 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!--====== Checkout Form Steps Part Start ======-->
-
+    <!-- Start Checkout Area -->
     <section class="checkout-wrapper section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="checkout-steps-form-style-1">
-                        <ul id="accordionExample">
-                            <li>
-                                <h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                    aria-expanded="true" aria-controls="collapseThree">Your Personal Details </h6>
-                                <section class="checkout-steps-form-content collapse show" id="collapseThree"
-                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <form action="{{ route('payment.process') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <!-- 付款方式 -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 class="title">付款方式</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="payment" id="credit" value="Credit" checked>
+                                        <label class="form-check-label" for="credit">線上刷卡</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment" id="atm" value="ATM">
+                                        <label class="form-check-label" for="atm">ATM 虛擬帳號繳費</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 收件人資訊 -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 class="title">收件人資訊</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="sameAsMember" name="sameAsMember">
+                                        <label class="form-check-label" for="sameAsMember">同會員資料</label>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="single-form form-default">
-                                                <label>User Name</label>
-                                                <div class="row">
-                                                    <div class="col-md-6 form-input form">
-                                                        <input type="text" placeholder="First Name">
-                                                    </div>
-                                                    <div class="col-md-6 form-input form">
-                                                        <input type="text" placeholder="Last Name">
-                                                    </div>
+                                                <label>姓名<span class="text-danger">*</span></label>
+                                                <div class="form-input">
+                                                    <input type="text" name="username" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="single-form form-default">
-                                                <label>Email Address</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Email Address">
+                                                <label>電話<span class="text-danger">*</span></label>
+                                                <div class="form-input">
+                                                    <input type="tel" name="phone" required>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Phone Number</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Phone Number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form form-default">
-                                                <label>Mailing Address</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Mailing Address">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>City</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="City">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Post Code</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Post Code">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Country</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Country">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Region/State</label>
-                                                <div class="select-items">
-                                                    <select class="form-control">
-                                                        <option value="0">select</option>
-                                                        <option value="1">select option 01</option>
-                                                        <option value="2">select option 02</option>
-                                                        <option value="3">select option 03</option>
-                                                        <option value="4">select option 04</option>
-                                                        <option value="5">select option 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-checkbox checkbox-style-3">
-                                                <input type="checkbox" id="checkbox-3">
-                                                <label for="checkbox-3"><span></span></label>
-                                                <p>My delivery and mailing addresses are the same.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form button">
-                                                <button class="btn" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseFour" aria-expanded="false"
-                                                    aria-controls="collapseFour">next
-                                                    step</button>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                            </li>
-                            <li>
-                                <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                    aria-expanded="false" aria-controls="collapseFour">Shipping Address</h6>
-                                <section class="checkout-steps-form-content collapse" id="collapseFour"
-                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="single-form form-default">
-                                                <label>User Name</label>
-                                                <div class="row">
-                                                    <div class="col-md-6 form-input form">
-                                                        <input type="text" placeholder="First Name">
-                                                    </div>
-                                                    <div class="col-md-6 form-input form">
-                                                        <input type="text" placeholder="Last Name">
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                    <!-- 配送方式 -->
+                                    <div class="single-form form-default">
+                                        <label>配送方式<span class="text-danger">*</span></label>
+                                        <div class="select-items">
+                                            <select name="shipment" id="shipment" class="form-control" required>
+                                                <option value="">請選擇配送方式</option>
+                                                <option value="mail_send" data-fee="100">郵寄配送 (NT$100)</option>
+                                                <option value="711_b2c" data-fee="60">7-11取貨 (NT$60)</option>
+                                                <option value="family_b2c" data-fee="60">全家取貨 (NT$60)</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Email Address</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Email Address">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Phone Number</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Phone Number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-form form-default">
-                                                <label>Mailing Address</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Mailing Address">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>City</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="City">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Post Code</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Post Code">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Country</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Country">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-form form-default">
-                                                <label>Region/State</label>
-                                                <div class="select-items">
-                                                    <select class="form-control">
-                                                        <option value="0">select</option>
-                                                        <option value="1">select option 01</option>
-                                                        <option value="2">select option 02</option>
-                                                        <option value="3">select option 03</option>
-                                                        <option value="4">select option 04</option>
-                                                        <option value="5">select option 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-payment-option">
-                                                <h6 class="heading-6 font-weight-400 payment-title">Select Delivery
-                                                    Option</h6>
-                                                <div class="payment-option-wrapper">
-                                                    <div class="single-payment-option">
-                                                        <input type="radio" name="shipping" checked id="shipping-1">
-                                                        <label for="shipping-1">
-                                                            <img src="assets/images/shipping/shipping-1.png"
-                                                                alt="Sipping">
-                                                            <p>Standerd Shipping</p>
-                                                            <span class="price">$10.50</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="single-payment-option">
-                                                        <input type="radio" name="shipping" id="shipping-2">
-                                                        <label for="shipping-2">
-                                                            <img src="assets/images/shipping/shipping-2.png"
-                                                                alt="Sipping">
-                                                            <p>Standerd Shipping</p>
-                                                            <span class="price">$10.50</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="single-payment-option">
-                                                        <input type="radio" name="shipping" id="shipping-3">
-                                                        <label for="shipping-3">
-                                                            <img src="assets/images/shipping/shipping-3.png"
-                                                                alt="Sipping">
-                                                            <p>Standerd Shipping</p>
-                                                            <span class="price">$10.50</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="single-payment-option">
-                                                        <input type="radio" name="shipping" id="shipping-4">
-                                                        <label for="shipping-4">
-                                                            <img src="assets/images/shipping/shipping-4.png"
-                                                                alt="Sipping">
-                                                            <p>Standerd Shipping</p>
-                                                            <span class="price">$10.50</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="steps-form-btn button">
-                                                <button class="btn" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                                    aria-controls="collapseThree">previous</button>
-                                                <a href="javascript:void(0)" class="btn btn-alt">Save & Continue</a>
+                                    </div>
+
+                                    <!-- 地址欄位 -->
+                                    <div class="addr" style="display:none;">
+                                        <div class="single-form form-default">
+                                            <label>寄送地址<span class="text-danger">*</span></label>
+                                            <div class="form-input">
+                                                <div id="twzipcode"></div>
+                                                <input type="text" name="address" class="mt-2" placeholder="請輸入詳細地址">
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                            </li>
-                            <li>
-                                <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapsefive"
-                                    aria-expanded="false" aria-controls="collapsefive">Payment Info</h6>
-                                <section class="checkout-steps-form-content collapse" id="collapsefive"
-                                    aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="checkout-payment-form">
+
+                                    <!-- 超商取貨按鈕 -->
+                                    <div class="map-btn" style="display:none;">
+                                        <button type="button" class="btn btn-primary">選擇門市</button>
+                                    </div>
+
+                                    <!-- 訂單備註 -->
+                                    <div class="single-form form-default">
+                                        <label>訂單備註</label>
+                                        <div class="form-input">
+                                            <textarea name="note" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 發票資訊 -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 class="title">發票資訊</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="single-form form-default">
+                                        <label>發票類型</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="invoice_type" id="invoice2" value="2" checked>
+                                            <label class="form-check-label" for="invoice2">二聯式發票</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="invoice_type" id="invoice3" value="3">
+                                            <label class="form-check-label" for="invoice3">三聯式發票</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- 三聯式發票欄位 -->
+                                    <div class="invoice-company-fields" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="single-form form-default">
-                                                    <label>Cardholder Name</label>
-                                                    <div class="form-input form">
-                                                        <input type="text" placeholder="Cardholder Name">
+                                                    <label>公司名稱</label>
+                                                    <div class="form-input">
+                                                        <input type="text" name="company_name">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="single-form form-default">
-                                                    <label>Card Number</label>
-                                                    <div class="form-input form">
-                                                        <input id="credit-input" type="text"
-                                                            placeholder="0000 0000 0000 0000">
-                                                        <img src="assets/images/payment/card.png" alt="card">
+                                                    <label>統一編號</label>
+                                                    <div class="form-input">
+                                                        <input type="text" name="company_number">
                                                     </div>
                                                 </div>
-                                                <div class="payment-card-info">
-                                                    <div class="single-form form-default mm-yy">
-                                                        <label>Expiration</label>
-                                                        <div class="expiration d-flex">
-                                                            <div class="form-input form">
-                                                                <input type="text" placeholder="MM">
-                                                            </div>
-                                                            <div class="form-input form">
-                                                                <input type="text" placeholder="YYYY">
-                                                            </div>
-                                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="single-form form-default">
+                                                    <label>公司地址</label>
+                                                    <div class="form-input">
+                                                        <input type="text" name="company_address">
                                                     </div>
-                                                    <div class="single-form form-default">
-                                                        <label>CVC/CVV <span><i
-                                                                    class="mdi mdi-alert-circle"></i></span></label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="***">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-form form-default button">
-                                                    <button class="btn">pay now</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                            </li>
-                        </ul>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="checkout-sidebar">
-                        <div class="checkout-sidebar-coupon">
-                            <p>Appy Coupon to get discount!</p>
-                            <form action="#">
-                                <div class="single-form form-default">
-                                    <div class="form-input form">
-                                        <input type="text" placeholder="Coupon Code">
-                                    </div>
-                                    <div class="button">
-                                        <button class="btn">apply</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="checkout-sidebar-price-table mt-30">
-                            <h5 class="title">Pricing Table</h5>
-
+                        <!-- 訂單摘要 -->
+                        <div class="checkout-sidebar-price-table">
+                            <h5 class="title">訂單摘要</h5>
                             <div class="sub-total-price">
-                                <div class="total-price">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$144.00</p>
-                                </div>
+                                @foreach($cart as $item)
+                                    <div class="total-price">
+                                        <p class="value">{{ $item['product_name'] }} x {{ $item['quantity'] }}</p>
+                                        <p class="price">NT${{ number_format($item['price'] * $item['quantity']) }}</p>
+                                    </div>
+                                @endforeach
                                 <div class="total-price shipping">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$10.50</p>
-                                </div>
-                                <div class="total-price discount">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$10.00</p>
+                                    <p class="value">運費</p>
+                                    <p class="price shipping-fee">NT$0</p>
                                 </div>
                             </div>
-
                             <div class="total-payable">
                                 <div class="payable-price">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$164.50</p>
+                                    <p class="value">總計</p>
+                                    <p class="price">NT${{ number_format($total) }}</p>
                                 </div>
                             </div>
-                            <div class="price-table-btn button">
-                                <a href="javascript:void(0)" class="btn btn-alt">Checkout</a>
+                            <div class="price-table-btn">
+                                <button type="submit" class="btn btn-alt">提交訂單</button>
                             </div>
-                        </div>
-                        <div class="checkout-sidebar-banner mt-30">
-                            <a href="product-grids.html">
-                                <img src="assets/images/banner/banner.jpg" alt="#">
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--====== Checkout Form Steps Part Ends ======-->
+    <!-- End Checkout Area -->
 @endsection
+
+@push('scripts')
+<script src="{{ asset('frontend/js/jquery.twzipcode.min.js') }}"></script>
+<script>
+$(document).ready(function() {
+    // 配送方式切換處理
+    $('#shipment').change(function() {
+        const selectedOption = $(this).find('option:selected');
+        const shippingFee = parseInt(selectedOption.data('fee')) || 0;
+        const shipmentType = $(this).val();
+
+        // 更新運費顯示
+        if (shippingFee > 0) {
+            $('.shipping-fee').text('NT$' + shippingFee);
+        } else {
+            $('.shipping-fee').text('NT$0');
+        }
+
+        // 切換地址/門市選擇顯示
+        if (shipmentType === 'mail_send') {
+            $('.addr').show();
+            $('.map-btn').hide();
+        } else if (shipmentType === '711_b2c' || shipmentType === 'family_b2c') {
+            $('.addr').hide();
+            $('.map-btn').show();
+        } else {
+            $('.addr').hide();
+            $('.map-btn').hide();
+        }
+
+        // 更新總金額
+        updateTotal();
+    });
+
+    // 發票類型切換處理
+    $('input[name="invoice_type"]').change(function() {
+        if ($(this).val() === '3') {
+            $('.invoice-company-fields').show();
+        } else {
+            $('.invoice-company-fields').hide();
+        }
+    });
+
+    // 更新總金額函數
+    function updateTotal() {
+        const subtotal = {{ $total }};
+        const shippingFee = parseInt($('#shipment option:selected').data('fee')) || 0;
+        const total = subtotal + shippingFee;
+        $('.total-payable .price').text('NT$' + total.toLocaleString());
+    }
+});
+</script>
+@endpush
