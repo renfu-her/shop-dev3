@@ -76,7 +76,7 @@
             
             <p class="warning">登入後請務必至會員中心修改密碼！</p>
             
-            <p>歡迎直接進入德善堂線上購物：</p>
+            <p>歡迎直接進入購物車 DEMO：</p>
             <div style="text-align: center;">
                 <a href="{{ config('app.url') }}" class="button" style="color: #fff !important; background-color: #007bff !important;">前往購物網站</a>
             </div>
@@ -84,7 +84,7 @@
         
         <div class="footer">
             <p>======本信件由系統自動發送，請勿直接回覆本信件，謝謝!======</p>
-            <p>© 2024 德善堂購物車. All rights reserved.</p>
+            <p>© 2024 購物車 DEMO. All rights reserved.</p>
         </div>
     </div>
 </body>

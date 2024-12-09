@@ -35,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'member/agreement',
             'login',
             'register',
+            'forget',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

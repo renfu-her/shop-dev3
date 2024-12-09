@@ -227,7 +227,7 @@
                                         </ul>
                                     </li> --}}
                                     <li class="nav-item">
-                                        <a href="#" aria-label="Toggle navigation">常見問題</a>
+                                        <a href="{{ route('faq.index') }}" aria-label="Toggle navigation">常見問題</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('contact') }}" aria-label="Toggle navigation">聯絡我們</a>

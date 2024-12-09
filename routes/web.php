@@ -58,7 +58,7 @@ Route::get('/activity', [ActivityController::class, 'index'])->name('activity.in
 Route::get('/activity/{id}', [ActivityController::class, 'detail'])->name('activity.detail');
 
 // 常見問題路由
-Route::get('/faqs/{category?}', [FaqController::class, 'index'])->name('faqs.index');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 // 聯絡我們路由
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

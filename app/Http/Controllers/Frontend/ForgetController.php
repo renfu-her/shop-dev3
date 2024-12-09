@@ -13,7 +13,7 @@ class ForgetController extends Controller
 {
     public function forget()
     {
-        return view('frontend.login.forget');
+        return view('frontend.auth.forget');
     }
 
     public function forgetProcess(Request $request)
@@ -44,7 +44,7 @@ class ForgetController extends Controller
 
         Mail::send('emails.forget-password', $emailData, function($message) use ($member) {
             $message->to($member->email)
-                   ->subject('德善堂購物車 - 密碼重置通知');
+                   ->subject('購物車 DEMO - 密碼重置通知');
         });
 
         return redirect()->route('login')->with('success', '新密碼已發送至您的郵箱');

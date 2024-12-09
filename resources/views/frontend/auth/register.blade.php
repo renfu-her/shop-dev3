@@ -102,7 +102,9 @@
 
                             <div class="form-group d-flex align-items-center justify-content-center">
                                 <input type="checkbox" id="agree" name="agree" required class="me-2">
-                                <label for="agree" class="mb-0">同意會員條款</label>
+                                <label for="agree" class="mb-0">
+                                    <a href="{{ route('faq.index') }}" target="_blank">同意會員條款</a>
+                                </label>
                             </div>
 
                             <div class="button">
