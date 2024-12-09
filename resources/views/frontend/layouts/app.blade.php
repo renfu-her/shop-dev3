@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/LineIcons.3.0.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/tiny-slider.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/glightbox.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=' . time()) }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css?v=' . time()) }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
@@ -58,7 +58,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-7">
                         <!-- Start Header Logo -->
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="{{ asset('frontend/assets/images/logo/e-commerce-logo.png') }}" alt="Logo"
                                 style="height: 80px; width: auto;">
                         </a>
@@ -259,6 +259,7 @@
     <!-- End Header Area -->
 
     @include('frontend.layouts.partials.toast-messages')
+
     @yield('content')
 
     <!-- Start Footer Area -->

@@ -33,49 +33,49 @@ class JoinController extends Controller
 
     public function joinProcess(Request $request)
     {
-        // 表單驗證規則
-        $validated = $request->validate([
-            'email' => 'required|email|unique:members,email',
-            'password' => 'required|min:6|max:15|confirmed|regex:/^(?=.*[A-Za-z])(?=.*\d)/',
-            'name' => 'required|string|max:50',
-            'gender' => 'required|in:1,2',
-            'year' => 'numeric|min:1900|max:' . date('Y'),
-            'month' => 'numeric|min:1|max:12',
-            'day' => 'numeric|min:1|max:31',
-            'phone' => 'required|regex:/^09\d{8}$/',
-            'county' => 'required|string',
-            'district' => 'required|string',
-            'address' => 'required|string',
-            'captcha' => 'required',
-            'agree' => 'required|accepted',
-        ], [
-            'agree.required' => '請同意會員條款',
-            'agree.accepted' => '請同意會員條款',
-        ]);
+
+        if (empty($request->name)) {
+            return $this->error('名稱不能為空');
+        }
+
+        if (empty($request->email)) {
+            return $this->error('信箱不能為空');
+        }
+
+        if (empty($request->phone)) {
+            return $this->error('手機號碼不能為空');
+        }
+
+        if (empty($request->password)) {
+            return $this->error('密碼不能為空');
+        }
+
+        if ($request->password !== $request->password_confirmation) {
+            return $this->error('密碼與確認密碼不一致');
+        }
 
         // 驗證驗證碼
         if (!$this->captchaService->validate($request->captcha)) {
             return $this->error('驗證碼不正確');
         }
 
-        // 驗證生日
-        $birthday = $this->validateBirthday($request);
-        if (is_string($birthday) && str_contains($birthday, 'error:')) {
-            return $this->error(str_replace('error:', '', $birthday));
+        $member = Member::where('email', $request->email)->first();
+        if ($member) {
+            return $this->error('此信箱已經註冊過');
         }
+
+        if (!$request->agree) {
+            return $this->error('請同意會員條款');
+        }
+
 
         // 創建會員
         $member = Member::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'name' => $request->name,
-            'gender' => $request->gender,
-            'birthday' => $birthday,
             'phone' => $request->phone,
-            'county' => $request->county,
-            'district' => $request->district,
-            'address' => $request->address,
-            'zipcode' => $request->zipcode,
+            'agree' => $request->agree == 'on' ? 1 : 0,
             'status' => 1,
             'email_verified_at' => now(),
         ]);

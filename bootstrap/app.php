@@ -33,6 +33,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin/logout',
             'admin/orders/*/update-status',
             'member/agreement',
+            'login',
+            'register',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

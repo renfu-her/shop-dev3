@@ -20,7 +20,14 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
+            'captcha' => 'required|min:5',
         ]);
+
+        if ($credentials['captcha'] !== session('captcha_code')) {
+            return back()->withInput()->with('error', '驗證碼錯誤');
+        }
+
+        unset($credentials['captcha']);
 
         if (Auth::guard('member')->attempt($credentials)) {
             $request->session()->regenerate();
@@ -28,12 +35,13 @@ class LoginController extends Controller
             if ($request->has('redirect_to')) {
                 return redirect($request->redirect_to);
             }
-            
+
             return redirect()->intended(route('home'))->with('success', '登入成功');
         }
 
         return back()->withErrors([
             'email' => '帳號或密碼錯誤',
+            'captcha' => '驗證碼錯誤',
         ])->withInput()->with('error', '帳號或密碼錯誤');
     }
 
@@ -43,5 +51,4 @@ class LoginController extends Controller
         session()->forget('cart');
         return redirect()->route('home')->with('success', '登出成功');
     }
-
 }

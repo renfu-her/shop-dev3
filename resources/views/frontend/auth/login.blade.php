@@ -34,18 +34,18 @@
                             </div>
                             <div class="form-group input-group">
                                 <label for="reg-fn">電子信箱</label>
-                                <input class="form-control" type="email" id="reg-email" required>
+                                <input class="form-control" type="email" id="email" name="email" required>
                             </div>
                             <div class="form-group input-group">
                                 <label for="reg-fn">密碼</label>
-                                <input class="form-control" type="password" id="reg-pass" required>
+                                <input class="form-control" type="password" id="password" name="password" required>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="verify" name="captcha"
                                         placeholder="請輸入驗證碼" style="text-transform: uppercase; width: 150px;"
-                                        oninput="this.value = this.value.toUpperCase()" required>
+                                        oninput="this.value = this.value.toUpperCase()" maxlength="5" required>
                                     <div class="input-group-append d-flex align-items-center">
                                         <span class="mx-2" style="font-size: 20px; letter-spacing: 3px;">
                                             <img src="{{ route('captcha.generate') }}" width="120" height="60"
@@ -59,17 +59,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex flex-wrap justify-content-between bottom-content">
+                        {{-- <div class="d-flex flex-wrap justify-content-between bottom-content">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input width-auto" id="exampleCheck1">
                                 <label class="form-check-label">記住我</label>
                             </div>
                             <a class="lost-pass" href="account-password-recovery.html">忘記密碼？</a>
-                        </div>
+                        </div> --}}
                         <div class="button">
-                            <button class="btn" type="submit">登入</button>
+                            <button class="btn" type="button" id="login">登入</button>
                         </div>
-                        <p class="outer-link">沒有帳號？ <a href="register.html">註冊這裡</a>
+                        <p class="outer-link">沒有帳號？ <a href="{{ route('register') }}">註冊這裡</a>
                         </p>
                 </div>
                 </form>
@@ -83,39 +83,36 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#loginForm').submit(function(event) {
+            $('#login').on('click', function() {
                 event.preventDefault();
 
                 const email = $('#email').val();
                 const password = $('#password').val();
-                const passwordConfirm = $('#password_confirmation').val();
+                const captcha = $('#verify').val();
 
                 if (!email) {
-                    window.showToast('請輸入電子信箱');
+                    window.showToast('請輸入電子信箱', 'error');
                     return false;
                 }
 
                 if (!password) {
-                    window.showToast('請輸入密碼');
-                    return false;
-                }
-
-                if (password !== passwordConfirm) {
-                    window.showToast('兩次輸入的密碼不一致');
+                    window.showToast('請輸入密碼', 'error');
                     return false;
                 }
 
                 if (!/^(?=.*[A-Za-z])(?=.*\d).{6,15}$/.test(password)) {
-                    window.showToast('密碼必須為 6~15 字元，且至少包含一個英文字母和數字');
+                    window.showToast('密碼必須為 6~15 字元，且至少包含一個英文字母和數字', 'error');
                     return false;
                 }
 
-                const captcha = $('#verify').val();
                 if (!captcha || captcha.length !== 5) {
-                    window.showToast('請輸入 5 位驗證碼');
+                    window.showToast('請輸入 5 位驗證碼', 'error');
                     return false;
                 }
+
+                $('#loginForm').submit();
             });
+
         });
     </script>
 @endpush

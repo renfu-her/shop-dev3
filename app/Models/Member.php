@@ -22,6 +22,7 @@ class Member extends Authenticatable
         'gender',
         'birthday',
         'is_active',
+        'agree',
     ];
 
     protected $hidden = [
