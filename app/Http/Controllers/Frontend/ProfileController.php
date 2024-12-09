@@ -38,6 +38,6 @@ class ProfileController extends Controller
         $member->address = $request->address;
         $member->save();
         
-        return redirect()->route('profile.index')->with('success', '資料更新成功');
+        return redirect()->route('home')->with('success', '資料更新成功');
     }
 }

@@ -64,7 +64,7 @@
 
 
                             <div class="button">
-                                <button class="btn" type="submit" id="forget">重置密碼</button>
+                                <button class="btn" type="button" id="forget">重置密碼</button>
                             </div>
                         </form>
                     </div>
@@ -78,12 +78,9 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-
-            $('#forgetForm').submit(function(e) {
-                e.preventDefault();
-                return false;
+            $('#forget').click(function() {
+                $('#forgetForm').submit();
             });
-
         });
     </script>
 @endsection

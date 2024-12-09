@@ -36,6 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'login',
             'register',
             'forget',
+            'profile',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
