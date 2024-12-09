@@ -50,3 +50,15 @@
         opacity: 1;
     }
 }
+
+.single-product {
+    cursor: pointer;
+}
+
+.single-product .product-info {
+    height: 200px;
+}
+
+.single-product .title {
+    height: 80px;
+}

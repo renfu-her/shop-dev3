@@ -64,21 +64,24 @@
             <div class="row">
                 @foreach ($hotProducts as $product)
                     <div class="col-lg-3 col-md-6 col-12">
-                        <div class="single-product">
+                        <div class="single-product"
+                            onclick="window.location.href='{{ route('products.itemDetail', $product->id) }}'">
                             <div class="product-image">
                                 <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
-                                <div class="button">
-                                    <a href="{{ route('products.itemDetail', $product->id) }}" class="btn"><i
-                                            class="lni lni-cart"></i> 加入購物車</a>
-                                </div>
+                                {{-- <div class="button">
+                                    <a href="{{ route('products.itemDetail', $product->id) }}" class="btn">
+                                        <i class="fa fa-eye"></i>
+                                        <span>查看詳情</span>
+                                    </a>
+                                </div> --}}
                             </div>
                             <div class="product-info">
                                 <span class="category">{{ $product->category->name }}</span>
                                 <h4 class="title">
-                                    <a href="product-grids.html">{{ $product->name }}</a>
+                                    <a href="{{ route('products.itemDetail', $product->id) }}">{{ $product->name }}</a>
                                 </h4>
 
-                                <div class="price">
+                                <div class="price ">
                                     @if ($product->special_price > 0)
                                         <span class="special-price">原價：{{ $product->price }}</span><br>
                                         <span>優惠價：{{ $product->special_price }}</span>
@@ -107,7 +110,7 @@
                             <h2>Smart Watch 2.0</h2>
                             <p>Space Gray Aluminum Case with <br>Black/Volt Real Sport Band </p>
                             <div class="button">
-                                <a href="product-grids.html" class="btn">查看詳情</a>
+                                <a href="#" class="btn">查看詳情</a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +123,7 @@
                             <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
                                 incididunt ut labore.</p>
                             <div class="button">
-                                <a href="product-grids.html" class="btn">立即購買</a>
+                                <a href="#" class="btn">立即購買</a>
                             </div>
                         </div>
                     </div>
@@ -147,13 +150,14 @@
                         @foreach ($specialProducts as $product)
                             <div class="col-lg-4 col-md-4 col-12">
                                 <!-- Start Single Product -->
-                                <div class="single-product">
+                                <div class="single-product"
+                                    onclick="window.location.href='{{ route('products.itemDetail', $product->id) }}'">
                                     <div class="product-image">
                                         <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
-                                        <div class="button">
+                                        {{-- <div class="button">
                                             <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
                                                 加入購物車</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="product-info">
                                         <span class="category">{{ $product->category->name }}</span>
