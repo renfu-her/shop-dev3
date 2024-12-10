@@ -7,9 +7,12 @@
 
 - 一般頁面
   
-  [https://e-commerce-dev.dev-vue.com/](https://e-commerce-dev.dev-vue.com/)
+[https://shop-demo01.dev-vue.com/](https://shop-demo01.dev-vue.com/)
   
-  ![首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/e-commerce-home.png)
+![首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/01.png)
+![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/02.png)
+![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/03.png)
+![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/04.png)
   
 
 ## 使用方式
