@@ -7,7 +7,7 @@
 
 - 前臺頁面
   
-[https://shop-demo01.dev-vue.com/](https://shop-demo01.dev-vue.com/)
+[前端首頁](https://shop-demo01.dev-vue.com/)
   
 ![首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/01.png)
 ![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/02.png)
@@ -16,7 +16,7 @@
   
 - 後台頁面
   
-[https://shop-demo01.dev-vue.com/admin](https://shop-demo01.dev-vue.com/admin)
+[後台首頁](https://shop-demo01.dev-vue.com/admin)
 
 ![後台首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/05.png)
 
