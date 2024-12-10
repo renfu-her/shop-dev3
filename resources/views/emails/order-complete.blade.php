@@ -54,10 +54,6 @@
 
 <body>
 
-    <div class="header logo" style="text-align: center;">
-        <img src="{{ asset('frontend/img/logo_1.png') }}" alt="Logo" class="logo">
-    </div>
-
     <div class="content">
         <h2>訂單完成通知</h2>
 
