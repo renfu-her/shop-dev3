@@ -56,7 +56,7 @@
                     <div class="product-grids-head">
                         <div class="product-grid-topbar">
                             <div class="row align-items-center">
-                                <div class="col-lg-7 col-md-8 col-12">
+                                <div class="col-lg-12 col-md-12 col-12">
                                     <div class="product-sorting">
                                         <label for="sorting">排序:</label>
                                         <select class="form-control" id="sorting">
@@ -70,20 +70,7 @@
                                         <h3 class="total-show-product">顯示: <span>1 - 12 項</span></h3>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 col-md-4 col-12">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-grid" type="button" role="tab"
-                                                aria-controls="nav-grid" aria-selected="true"><i
-                                                    class="lni lni-grid-alt"></i></button>
-                                            <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-list" type="button" role="tab"
-                                                aria-controls="nav-list" aria-selected="false"><i
-                                                    class="lni lni-list"></i></button>
-                                        </div>
-                                    </nav>
-                                </div>
+
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
@@ -91,33 +78,29 @@
                                 aria-labelledby="nav-grid-tab">
                                 <div class="row">
                                     @forelse ($products as $product)
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="single-product">
+                                        <div class="col-lg-3 col-md-6 col-12">
+                                            <!-- Start Single Product -->
+                                            <div class="single-product" onclick="window.location.href='{{ route('products.itemDetail', $product->id) }}'">
                                                 <div class="product-image">
-                                                    <img src="{{ $product->primaryImage->image_url }}" alt="#">
-                                                    <div class="button">
-                                                        <a href="{{ route('products.itemDetail', $product->id) }}"
-                                                            class="btn"><i class="lni lni-cart"></i> 加入購物車</a>
-                                                    </div>
+                                                    <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
                                                 </div>
                                                 <div class="product-info">
                                                     <span class="category">{{ $product->category->name }}</span>
                                                     <h4 class="title">
-                                                        <a href="product-grids.html">{{ $product->name }}</a>
+                                                        <a href="{{ route('products.itemDetail', $product->id) }}">{{ $product->name }}</a>
                                                     </h4>
-                                                    <ul class="review">
-                                                        <li><i class="lni lni-star-filled"></i></li>
-                                                        <li><i class="lni lni-star-filled"></i></li>
-                                                        <li><i class="lni lni-star-filled"></i></li>
-                                                        <li><i class="lni lni-star-filled"></i></li>
-                                                        <li><i class="lni lni-star"></i></li>
-                                                        <li><span>4.0 評價(s)</span></li>
-                                                    </ul>
                                                     <div class="price">
-                                                        <span>{{ $product->price }}</span>
+                                                        @if ($product->special_price > 0)
+                                                            <span class="special-price">原價：{{ $product->price }}</span><br>
+                                                            <span>優惠價：{{ $product->special_price }}</span>
+                                                        @else
+                                                            <span class="special-price"></span><br>
+                                                            <span>原價：{{ $product->price }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- End Single Product -->
                                         </div>
                                     @empty
                                         <div class="col-lg-12 col-md-12 col-12">
@@ -162,8 +145,7 @@
                                                                 class="lni lni-chevron-right"></i></a></li>
                                                 @else
                                                     <li class="disabled"><span><i
-                                                                class="lni lni-chevron-right"></i></span>
-                                                    </li>
+                                                                class="lni lni-chevron-right"></i></span></li>
                                                 @endif
                                             </ul>
                                         @endif

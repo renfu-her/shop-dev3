@@ -204,8 +204,10 @@
                                             aria-label="Toggle navigation">會員專區</a>
                                         <ul class="sub-menu collapse" id="submenu-1-3">
                                             @if (Auth::guard('member')->check())
-                                                <li class="nav-item"><a href="{{ route('profile.index') }}">會員資料</a></li>
-                                                <li class="nav-item"><a href="{{ route('orders.list') }}">訂單列表</a></li>
+                                                <li class="nav-item"><a href="{{ route('profile.index') }}">會員資料</a>
+                                                </li>
+                                                <li class="nav-item"><a href="{{ route('orders.list') }}">訂單列表</a>
+                                                </li>
                                                 <li class="nav-item"><a href="{{ route('logout') }}">登出</a></li>
                                             @else
                                                 <li class="nav-item"><a href="{{ route('login') }}">登入</a></li>
@@ -278,9 +280,9 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
-                                <a href="index.html">
-                                    <img src="{{ asset('frontend/assets/images/logo/white-logo.svg') }}"
-                                        alt="#">
+                                <a href="{{ route('home') }}">
+                                    <img src="{{ asset('frontend/assets/images/logo/e-commerce-logo.png') }}"
+                                        alt="Logo" style="height: 80px; width: auto;">
                                 </a>
                             </div>
                         </div>
@@ -333,14 +335,12 @@
                                     <li>
                                         <a href="javascript:void(0)">
                                             <i class="lni lni-apple"></i>
-                                            <span class="small-title">在</span>
                                             <span class="big-title">App Store</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <i class="lni lni-play-store"></i>
-                                            <span class="small-title">在</span>
                                             <span class="big-title">Google Play</span>
                                         </a>
                                     </li>
