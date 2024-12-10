@@ -37,6 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'register',
             'forget',
             'profile',
+            'cart/add',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

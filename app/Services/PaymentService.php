@@ -33,15 +33,11 @@ class PaymentService
     public function paymentProcess(Request $request)
     {
 
-        // 驗證驗證碼
-        if ($request->captcha != session('captcha_code')) {
-            return redirect()->back()->with('error', '驗證碼錯誤');
-        }
-
         $member = Member::find(Auth::guard('member')->id());
         // 獲取購物車資料
         $cart = session('cart', []);
         // 計算訂單總金額
+
         $totalAmount = collect($cart)->sum(function ($item) {
             return $item['price'] * $item['quantity'];
         });
@@ -66,7 +62,7 @@ class PaymentService
         // 生成訂單編號
         $today = date('Ymd');
         if (config('config.app_run') === 'local') {
-            $orderNo = 'O' . $today;
+            $orderNo = 'ORDER' . $today;
         } else {
             $orderNo = 'OID' . $today;
         }
@@ -121,6 +117,7 @@ class PaymentService
 
         // 備註
         $order->note = $request->info;
+
 
         $order->save();
 

@@ -51,7 +51,7 @@ class ProductService
                     ->where('category_id', $id)
                     ->with('primaryImage')
                     ->orderBy('created_at', 'desc')
-                    ->paginate(9);
+                    ->paginate(12);
             } else {
                 // 如果沒有指定分類 ID，獲取所有產品
                 $categories = $this->category

@@ -160,7 +160,7 @@
                             <ul class="sub-category">
                                 @foreach (App\Models\Category::getMainCategories() as $category)
                                     <li>
-                                        <a href="{{ route('products.items', $category->id) }}">
+                                        <a href="javascript:void(0)">
                                             {{ $category->name }}
                                             @if ($category->children->count() > 0)
                                                 <i class="lni lni-chevron-right"></i>

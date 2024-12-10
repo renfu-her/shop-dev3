@@ -80,14 +80,17 @@
                                     @forelse ($products as $product)
                                         <div class="col-lg-3 col-md-6 col-12">
                                             <!-- Start Single Product -->
-                                            <div class="single-product" onclick="window.location.href='{{ route('products.itemDetail', $product->id) }}'">
+                                            <div class="single-product"
+                                                onclick="window.location.href='{{ route('products.itemDetail', $product->id) }}'">
                                                 <div class="product-image">
-                                                    <img src="{{ $product->primaryImage->image_url }}" alt="{{ $product->name }}">
+                                                    <img src="{{ $product->primaryImage->image_url }}"
+                                                        alt="{{ $product->name }}">
                                                 </div>
                                                 <div class="product-info">
                                                     <span class="category">{{ $product->category->name }}</span>
                                                     <h4 class="title">
-                                                        <a href="{{ route('products.itemDetail', $product->id) }}">{{ $product->name }}</a>
+                                                        <a
+                                                            href="{{ route('products.itemDetail', $product->id) }}">{{ $product->name }}</a>
                                                     </h4>
                                                     <div class="price">
                                                         @if ($product->special_price > 0)
@@ -144,8 +147,8 @@
                                                     <li><a href="{{ $products->nextPageUrl() }}"><i
                                                                 class="lni lni-chevron-right"></i></a></li>
                                                 @else
-                                                    <li class="disabled"><span><i
-                                                                class="lni lni-chevron-right"></i></span></li>
+                                                    <li class="disabled"><span><i class="lni lni-chevron-right"></i></span>
+                                                    </li>
                                                 @endif
                                             </ul>
                                         @endif
