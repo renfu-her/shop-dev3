@@ -1,4 +1,4 @@
-# e-commerce-template
+# 電商模板
 
 ## 後台管理
 - `/admin`
