@@ -34,6 +34,16 @@ class PaymentService
     {
 
         $member = Member::find(Auth::guard('member')->id());
+        if(!empty($request->phone)){
+            $member->phone = $request->phone;
+            $member->save();
+        }
+
+        if(!empty($request->country)){
+            $member->name = $request->username;
+            $member->save();
+        }
+
         // 獲取購物車資料
         $cart = session('cart', []);
         // 計算訂單總金額
