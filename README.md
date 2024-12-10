@@ -5,7 +5,7 @@
     - 帳號：admin@admin.com 
     - 密碼：Qq123456
 
-- 一般頁面
+- 前臺頁面
   
 [https://shop-demo01.dev-vue.com/](https://shop-demo01.dev-vue.com/)
   
@@ -14,6 +14,11 @@
 ![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/03.png)
 ![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/04.png)
   
+- 後台頁面
+  
+[https://shop-demo01.dev-vue.com/admin](https://shop-demo01.dev-vue.com/admin)
+
+![後台首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/05.png)
 
 ## 使用方式
 - 先建立 mysql 資料庫，並修改 .env 資料庫設定
