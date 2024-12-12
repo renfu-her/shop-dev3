@@ -71,9 +71,15 @@ class MailService
     public function sendFeedbackMail(string $email, string $message): bool
     {
         $subject = '問題回饋';
-        $content = ['message' => $message];
+        $content = ['content' => $message];
 
-        return $this->send($email, $subject, $content, 'emails.feedback');
+        return $this->send(
+            $email,
+            $subject,
+            $content,
+            'emails.feedback',
+            ['content' => $message]
+        );
     }
 
     /**
