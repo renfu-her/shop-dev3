@@ -15,7 +15,9 @@ class CartUpdated implements ShouldBroadcast
 
     public function __construct(
         public int $count
-    ) {}
+    ) {
+        Log::info('CartUpdated event triggered with count: ' . $this->count);
+    }
 
     public function broadcastOn(): Channel
     {
@@ -23,5 +25,19 @@ class CartUpdated implements ShouldBroadcast
         Log::info('CartUpdated event triggered with count: ' . $this->count);
 
         return new Channel('cart');
+    }
+
+    public function broadcastAs()
+    {
+
+        return 'CartUpdated';
+    }
+
+    public function broadcastWith()
+    {
+
+        return [
+            'count' => $this->count
+        ];
     }
 } 

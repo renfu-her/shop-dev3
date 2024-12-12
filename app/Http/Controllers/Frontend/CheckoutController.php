@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\CaptchaService;
 use Illuminate\Support\Facades\Http;
 use App\Models\Setting;
+use App\Events\CartUpdated;
 
 class CheckoutController extends Controller
 {
@@ -71,6 +72,10 @@ class CheckoutController extends Controller
 
         // 預設運費
         $shippingFee = 0;
+
+        // 在更新购物车的方法中
+        $cartCount = session()->get('cart', []);
+        event(new CartUpdated(count($cartCount)));
 
         return view('frontend.checkout.index', compact(
             'cart',

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Auth;
 use App\Events\CartUpdated;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -24,6 +25,9 @@ class CartController extends Controller
         } else {
             $cart = [];
         }
+
+        // 在頁面載入時就觸發購物車數量更新
+        event(new CartUpdated(count($cart)));
 
         if (empty($cart)) {
             return redirect()->route('home')->with('error', '購物車是空的');
@@ -75,8 +79,8 @@ class CartController extends Controller
         ];
 
         session()->put('cart', $cart);
-        // // 廣播購物車數量更新事件
-        // broadcast(new CartUpdated(count($cart)));
+        // 新增購物車數量更新事件
+        event(new CartUpdated(count($cart)));
 
         // 據 checkout_direct 參數決定跳轉
         if ($request->boolean('checkout_direct')) {
@@ -161,6 +165,9 @@ class CartController extends Controller
         if (isset($cart[$validated['item_id']])) {
             unset($cart[$validated['item_id']]);
             session()->put('cart', $cart);
+
+            // 新增購物車數量更新事件
+            event(new CartUpdated(count($cart)));
 
             return response()->json([
                 'success' => true,

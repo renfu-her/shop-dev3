@@ -112,7 +112,7 @@
                             <div class="col-lg-8 col-md-6 col-12">
                                 <div class="left">
                                     <div class="coupon">
-                                        <a href="{{ route('products.index') }}" class="btn btn-alt">
+                                        <a href="{{ route('home') }}" class="btn btn-alt">
                                             <i class="lni lni-arrow-left"></i> 繼續購物
                                         </a>
                                     </div>

@@ -84,63 +84,21 @@
                         <div class="middle-right-area">
                             <div class="navbar-cart">
                                 <div class="wishlist">
-                                    <a href="javascript:void(0)">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items">0</span>
-                                    </a>
+                                    @if (Auth::guard('member')->check())
+                                        <a href="{{ route('profile.index') }}">
+                                            <i class="fas fa-user"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('login') }}">
+                                            <i class="fas fa-user"></i>
+                                        </a>
+                                    @endif
                                 </div>
                                 <div class="cart-items">
                                     <a href="javascript:void(0)" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <span class="total-items">2</span>
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="total-items">{{ count(session()->get('cart', [])) }}</span>
                                     </a>
-                                    <!-- Shopping Item -->
-                                    <div class="shopping-item">
-                                        <div class="dropdown-cart-header">
-                                            <span>2 件商品</span>
-                                            <a href="cart.html">檢視購物車</a>
-                                        </div>
-                                        <ul class="shopping-list">
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="移除此商品"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="assets/images/header/cart-items/item1.jpg"
-                                                            alt="#"></a>
-                                                </div>
-
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">
-                                                            Apple Watch Series 6</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="移除此商品"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="assets/images/header/cart-items/item2.jpg"
-                                                            alt="#"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="bottom">
-                                            <div class="total">
-                                                <span>總計</span>
-                                                <span class="total-amount">$134.00</span>
-                                            </div>
-                                            <div class="button">
-                                                <a href="checkout.html" class="btn animate">結帳</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/ End Shopping Item -->
                                 </div>
                             </div>
                         </div>
@@ -433,8 +391,7 @@
     <script src="{{ asset('frontend/assets/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/custom.js?v=' . time()) }}"></script>
-
-
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.btn-refresh').click(function() {
@@ -454,6 +411,13 @@
                 });
             });
         });
+    </script>
+    <script>
+        window.Echo.channel('cart')
+            .listen('CartUpdated', (e) => {
+                console.log('Cart updated:', e.count);
+                $('.total-items').text(e.count);
+            });
     </script>
 
     @stack('scripts')
