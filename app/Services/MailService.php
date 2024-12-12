@@ -66,6 +66,17 @@ class MailService
     }
 
     /**
+     * 發送問題回饋郵件
+     */
+    public function sendFeedbackMail(string $email, string $message): bool
+    {
+        $subject = '問題回饋';
+        $content = ['message' => $message];
+
+        return $this->send($email, $subject, $content, 'emails.feedback');
+    }
+
+    /**
      * 發送密碼重置郵件
      */
     public function sendResetPasswordMail(Member $member, string $token): bool

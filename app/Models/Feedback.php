@@ -13,4 +13,14 @@ class Feedback extends Model
         'is_read',
         'is_replied',
     ];
+
+    public function getIsReadAttribute()
+    {
+        return $this->is_read ? '已讀' : '未讀';
+    }
+
+    public function getIsRepliedAttribute()
+    {
+        return $this->is_replied ? '已回覆' : '未回覆';
+    }
 }

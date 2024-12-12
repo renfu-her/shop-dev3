@@ -38,6 +38,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'forget',
             'profile',
             'cart/add',
+            'feedback',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
