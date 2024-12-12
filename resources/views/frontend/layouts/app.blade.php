@@ -392,6 +392,7 @@
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/custom.js?v=' . time()) }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    
     <script>
         $(document).ready(function() {
             $('.btn-refresh').click(function() {
