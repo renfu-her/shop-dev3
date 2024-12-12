@@ -39,19 +39,20 @@
                                 @endif
                                 <p class="info-text">{!! nl2br($product->sub_title) !!}</p>
                                 <div class="row">
-
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="color">規格：</label>
                                             <select class="form-control" id="spec_id" name="spec_id">
                                                 <option value="">請選擇規格</option>
-                                                @foreach ($specs as $spec)
+                                                @forelse ($specs as $spec)
                                                     <option value="{{ $spec->id }}"
-                                                        data-price="{{ number_format($product->special_price ?? number_format($product->price)) }}"
-                                                        data-special-price="{{ number_format($spec->price) }}">
+                                                        data-price="{{ $product->special_price ?? $product->price }}"
+                                                        data-special-price="{{ $spec->price }}">
                                                         {{ $spec->name }}
                                                     </option>
-                                                @endforeach
+                                                @empty
+                                                    <option value="">無規格</option>
+                                                @endforelse
                                             </select>
                                         </div>
                                     </div>
