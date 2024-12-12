@@ -234,6 +234,9 @@
                                     <li class="nav-item">
                                         <a href="{{ route('contact') }}" aria-label="Toggle navigation">聯絡我們</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('feedback.index') }}" aria-label="Toggle navigation">問題回饋</a>
+                                    </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
                         </nav>

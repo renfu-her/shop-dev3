@@ -69,21 +69,10 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#product-management" aria-expanded="false">
+            <a class="nav-link" href="{{ route('admin.products.index') }}">
                 <i class="fas fa-box menu-icon"></i>
-                <span class="menu-title">商品維護</span>
-                <i class="menu-arrow"></i>
+                <span class="menu-title">商品管理</span>
             </a>
-            <div class="collapse" id="product-management">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.categories.index') }}">分類管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.products.index') }}">商品管理</a>
-                    </li>
-                </ul>
-            </div>
         </li>
 
         <li class="nav-item">
