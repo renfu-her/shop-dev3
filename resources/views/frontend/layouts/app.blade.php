@@ -95,7 +95,7 @@
                                     @endif
                                 </div>
                                 <div class="cart-items">
-                                    <a href="javascript:void(0)" class="main-btn">
+                                    <a href="{{ route('cart.index') }}" class="main-btn">
                                         <i class="fas fa-shopping-cart"></i>
                                         <span class="total-items">{{ count(session()->get('cart', [])) }}</span>
                                     </a>
