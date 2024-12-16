@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <div class="wish-button">
-                                                <button class="btn" type="button">
+                                                <button class="btn" type="button" onclick="addToCart()">
                                                     <i class="fas fa-shopping-cart"></i>
                                                     加入購物車
                                                 </button>
@@ -121,7 +121,6 @@
             $('#checkoutButton').click(function() {
                 const spec = $('#spec_id').val();
                 const quantity = $('#quantity').val();
-                console.log(spec, quantity);
 
                 if (spec === "") {
                     window.showToast('請選擇規格', 'error');
@@ -159,6 +158,16 @@
         }
 
         function addToCart() {
+            const spec = $('#spec_id').val();
+            const quantity = $('#quantity').val();
+
+            if (spec === "") {
+                window.showToast('請選擇規格', 'error');
+                return false;
+            }
+
+            $('#addToCartForm').find('input[name="checkout_direct"]').val(0);
+
             $('#addToCartForm').submit();
         }
     </script>

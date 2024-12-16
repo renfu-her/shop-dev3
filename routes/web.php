@@ -75,18 +75,25 @@ Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
 Route::get('/captcha', [CaptchaController::class, 'generate'])->name('captcha.generate');
 Route::post('/captcha/refresh', [CaptchaController::class, 'generate'])->name('captcha.refresh');
 
+// 購物車路由
+Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('/add', [CartController::class, 'addToCart'])->name('add');
+    Route::post('/update/{item}', [CartController::class, 'update'])->name('update');
+    Route::post('/update-quantity', [CartController::class, 'updateQuantity'])->name('update-quantity');
+    Route::post('/remove', [CartController::class, 'remove'])->name('remove');
+});
+
 // 購物車和結帳路由
 Route::group(['middleware' => 'auth:member'], function () {
     // 購物車
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    // Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     // Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     // Route::delete('/cart/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
-    Route::put('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
+    // Route::put('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
 
     // 需要添加的路由
-    Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.update-quantity');
-    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::get('/checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
 
     // 結帳流程
