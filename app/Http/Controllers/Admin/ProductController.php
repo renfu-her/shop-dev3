@@ -49,7 +49,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'sub_title' => 'nullable|string|max:255',
@@ -75,6 +74,8 @@ class ProductController extends Controller
         $validated['is_hot'] = $request->has('is_hot') ? 1 : 0;
 
         $data = $request->validated();
+
+        dd($data);
 
         // 處理主圖
         if ($request->hasFile('image')) {

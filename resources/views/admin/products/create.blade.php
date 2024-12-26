@@ -159,7 +159,7 @@
                                 <div>
                                     <input type="checkbox" class="form-check-input p-1" id="is_hot" name="is_hot"
                                         value="1" {{ old('is_hot') ? 'checked' : '' }}>
-                                    <label class="form-check-label p-1" for="is_hot">熱銷��籤</label>
+                                    <label class="form-check-label p-1" for="is_hot">熱銷標籤</label>
                                 </div>
                             </div>
 
