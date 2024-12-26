@@ -7,18 +7,16 @@
 
 - 前臺頁面
   
-[前端首頁](https://shop-demo01.dev-vue.com/)
-  
-![首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/01.png)
-![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/02.png)
-![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/03.png)
-![](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/04.png)
-  
+[前端首頁](https://shop-demo02.dev-vue.com/)
+    
 - 後台頁面
   
-[後台首頁](https://shop-demo01.dev-vue.com/admin)
+[後台首頁](https://shop-demo02.dev-vue.com/admin)
 
-![後台首頁](https://raw.gitmirror.com/renfu-her/image-drive/main/develop/shop-demo01/05.png)
+
+## 更新說明
+- 2024-12-26 更新產品規格管理-價格 -> 優惠價
+- 2024-12-26 更新上圖方式，可以單張圖片上傳，也可以多張圖片上傳
 
 ## 使用方式
 - 先建立 mysql 資料庫，並修改 .env 資料庫設定
