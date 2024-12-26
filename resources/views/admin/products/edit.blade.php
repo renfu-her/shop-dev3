@@ -59,7 +59,8 @@
 
                             <div class="mb-3">
                                 <label for="sub_title" class="form-label">副標題</label>
-                                <textarea class="form-control @error('sub_title') is-invalid @enderror" id="sub_title" name="sub_title" rows="3">{{ old('sub_title', $product->sub_title) }}</textarea>
+                                <input type="text" class="form-control @error('sub_title') is-invalid @enderror"
+                                    id="sub_title" name="sub_title" value="{{ old('sub_title', $product->sub_title) }}">
                                 @error('sub_title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -78,22 +79,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="price" class="form-label">原價</label>
+                                <label for="price" class="form-label">售價</label>
                                 <input type="number" class="form-control @error('price') is-invalid @enderror"
                                     id="price" name="price" value="{{ old('price', $product->price) }}" required>
                                 @error('price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="special_price" class="form-label">優惠價</label>
-                                <input type="number" class="form-control @error('special_price') is-invalid @enderror"
-                                    id="special_price" name="special_price"
-                                    value="{{ old('special_price', $product->special_price) }}">
-                                @error('cash_price')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -112,70 +101,46 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="image" class="form-label">主要圖片 (<span class="text-danger">寬度
-                                        800px，高度不限</span>)</label>
-                                @if ($product->image)
-                                    <div class="mb-2">
-                                        <img src="{{ $product->image_url }}" alt="Current Image" class="img-thumbnail"
-                                            style="max-width: 200px">
+                                @if ($product->primaryImage)
+                                    <div class="mb-3">
+                                        <label class="form-label">目前圖片</label>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="card h-100">
+                                                    <div class="card-img-wrapper">
+                                                        <img src="{{ $product->primaryImage->image_url }}"
+                                                            class="card-img-top" alt="{{ $product->name }}">
+                                                    </div>
+                                                    <div class="card-footer p-2 text-center">
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-danger delete-image"
+                                                            data-image-id="{{ $product->primaryImage->id }}">
+                                                            刪除圖片
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endif
+
+                                <label for="image" class="form-label">
+                                    {{ $product->primaryImage ? '更換圖片' : '上傳圖片' }}
+                                    (<span class="text-danger">寬度 800px，高度不限</span>)
+                                </label>
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                    id="image" name="image" accept="image/*">
-                                <small class="text-muted">請上傳商品主圖</small>
+                                    id="image" name="image" accept="image/*"
+                                    {{ !$product->primaryImage ? 'required' : '' }}>
+                                <small class="text-muted">
+                                    {{ $product->primaryImage ? '上傳新圖片將會替換現有圖片' : '請上傳商品圖片' }}
+                                </small>
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <div id="mainImagePreview"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="images" class="form-label">其他圖片 (<span class="text-danger">寬度
-                                        800px，高度不限</span>)</label>
-                                <input type="file" class="form-control @error('images.*') is-invalid @enderror"
-                                    id="images" name="images[]" multiple accept="image/*">
-                                <small class="text-muted">可以選擇多張圖片</small>
-                                @error('images.*')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <div id="multiImagePreview" class="row g-2"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">現有圖片</label>
-                                <div id="existingImages" class="row g-3">
-                                    @foreach ($product->images as $image)
-                                        <div class="col-md-3 product-image-card" data-image-id="{{ $image->id }}">
-                                            <div class="card h-100">
-                                                <div class="card-img-wrapper">
-                                                    <img src="{{ $image->image_url }}" class="card-img-top"
-                                                        alt="{{ $product->name }}">
-                                                </div>
-                                                <div class="card-footer p-2">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="form-check">
-                                                            <input type="radio" class="form-check-input primary-image"
-                                                                name="primary_image" value="{{ $image->id }}"
-                                                                {{ $image->is_primary ? 'checked' : '' }}>
-                                                            <label class="form-check-label small">主圖</label>
-                                                        </div>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-outline-danger delete-image"
-                                                            data-image-id="{{ $image->id }}">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                <div id="imagePreview" class="row g-2"></div>
                             </div>
 
                             <div class="mb-3">
@@ -189,7 +154,7 @@
                                                         <input type="checkbox" class="form-check-input"
                                                             style="margin-left: 3px;" id="spec_{{ $spec->id }}"
                                                             name="specs[]" value="{{ $spec->id }}"
-                                                            {{ in_array($spec->id, $product->specs->pluck('id')->toArray()) ? 'checked' : '' }}
+                                                            {{ $spec->is_active == 1 ? 'checked' : '' }}
                                                             onclick="return false;">
                                                         <label class="form-check-label" for="spec_{{ $spec->id }}">
                                                             {{ $spec->name }}
@@ -268,8 +233,6 @@
     </div>
 @endsection
 
-@include('admin.partials.ckeditor')
-
 @push('styles')
     <style>
         .product-image-card {
@@ -338,13 +301,10 @@
             text-align: center;
             color: #6c757d;
         }
-
-        /* 讓編輯器內容可以滾動 */
-        .ck-editor__editable {
-            height: 500px;
-        }
     </style>
 @endpush
+
+@include('admin.partials.ckeditor')
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
@@ -353,16 +313,16 @@
         $(document).ready(function() {
             // 表單提交前驗證
             $('form').on('submit', function(e) {
-                const description = editor.getData();
+                const content = editor.getData();
 
-                if (!description.trim()) {
+                if (!content.trim()) {
                     e.preventDefault();
                     alert('請填寫商品描述');
                     return false;
                 }
 
                 // 更新隱藏的 textarea 值
-                $('#description').val(description);
+                $('#content').val(content);
             });
 
             $.ajaxSetup({
@@ -371,109 +331,44 @@
                 }
             });
 
-            // 定義產品ID供 AJAX 使用
+            // 定義產品ID供 AJAX 使��
             const productId = {{ $product->id }};
 
-            // 主圖預覽
+            // 圖片預覽
             $('#image').on('change', function(e) {
-                const $preview = $('#mainImagePreview');
+                const $preview = $('#imagePreview');
                 $preview.empty();
 
-                const file = e.target.files[0];
-                if (file) {
+                if (e.target.files && e.target.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         $preview.html(`
-                            <div class="card" style="max-width: 300px;">
-                                <img src="${e.target.result}" class="card-img-top" alt="主圖預覽">
-                                <div class="card-body p-2">
-                                    <small class="text-muted">主要圖片</small>
-                                </div>
-                            </div>
-                        `);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // 多圖預覽
-            $('#images').on('change', function(e) {
-                const $preview = $('#multiImagePreview');
-                $preview.empty();
-
-                $.each(e.target.files, function(index, file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        $preview.append(`
-                            <div class="col-md-3 mb-2">
+                            <div class="col-md-3">
                                 <div class="card">
-                                    <img src="${e.target.result}" class="card-img-top" alt="預覽">
+                                    <img src="${e.target.result}" class="card-img-top" alt="Preview">
                                     <div class="card-body p-2">
-                                        <small class="text-muted">圖片 ${index + 1}</small>
+                                        <small class="text-muted">新圖片預覽</small>
                                     </div>
                                 </div>
                             </div>
                         `);
                     }
-                    reader.readAsDataURL(file);
-                });
-            });
-
-            // 圖片排序
-            new Sortable($('#existingImages')[0], {
-                animation: 150,
-                ghostClass: 'sortable-ghost',
-                chosenClass: 'sortable-chosen',
-                dragClass: 'sortable-drag',
-                handle: '.card', // 整張卡片都可以拖曳
-                onEnd: function() {
-                    const images = $('#existingImages > div').map(function(index) {
-                        return {
-                            id: $(this).data('image-id'),
-                            sort_order: index
-                        };
-                    }).get();
-
-                    // 更新排序
-                    $.ajax({
-                        url: `/admin/products/${productId}/images/order`,
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: JSON.stringify({
-                            images
-                        }),
-                        contentType: 'application/json'
-                    });
+                    reader.readAsDataURL(e.target.files[0]);
                 }
-            });
-
-            // 設置主圖
-            $('.primary-image').on('change', function() {
-                $.ajax({
-                    url: `/admin/products/${productId}/images/${$(this).val()}/primary`,
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
             });
 
             // 刪除圖片
             $('.delete-image').on('click', function() {
-                const $button = $(this);
-                const imageId = $button.data('image-id');
-
                 if (confirm('確定要刪除此圖片嗎？')) {
                     $.ajax({
-                        url: `/admin/products/${productId}/images/${imageId}`,
+                        url: `/admin/products/${productId}/image`,
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function() {
-                            $button.closest('.col-md-3').remove();
+                            $('.card-img-wrapper').parent().parent().parent().remove();
+                            $('#image').prop('required', true);
                         }
                     });
                 }

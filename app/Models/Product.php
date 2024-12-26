@@ -104,4 +104,14 @@ class Product extends Model
         }
         return asset('storage/products/' . $this->image);
     }
+
+    public function getSpecPriceAttribute()
+    {
+        $spec = $this->specs()
+            ->where('is_active', true)
+            ->orderBy('price', 'asc')
+            ->first();
+
+        return $spec ? $spec->price : $this->price;
+    }
 }
