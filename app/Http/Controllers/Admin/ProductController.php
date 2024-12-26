@@ -66,7 +66,7 @@ class ProductController extends Controller
             'meta_description' => 'nullable|string|max:160',
             'meta_keywords' => 'nullable|string|max:255',
             'content' => 'required|string',
-            'special_price' => 'nullable|numeric|min:0',    
+            'special_price' => 'nullable|numeric|min:0',
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -74,19 +74,29 @@ class ProductController extends Controller
         $validated['is_active'] = $request->has('is_active') ? 1 : 0;
         $validated['is_hot'] = $request->has('is_hot') ? 1 : 0;
 
-        $product = Product::create($validated);
+        $data = $request->validated();
 
+        // 處理主圖
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('products', $filename, 'public');
+            $data['image'] = $filename;
+        }
+
+        // 創建產品
+        $product = Product::create($data);
+
+        // 處理多圖片
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
-                $filename = $this->imageService->uploadImage(
-                    $image,
-                    "products/{$product->id}"
-                );
+                $filename = time() . '_' . ($index + 1) . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs("products/{$product->id}", $filename, 'public');
 
                 $product->images()->create([
                     'image_path' => $filename,
-                    'is_primary' => $index === 0,
-                    'sort_order' => $index
+                    'sort_order' => $index,
+                    'is_primary' => false
                 ]);
             }
         }

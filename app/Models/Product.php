@@ -31,7 +31,8 @@ class Product extends Model
         'meta_keywords',
         'content',
         'is_sale',
-        'special_price'
+        'special_price',
+        'image'
     ];
 
     protected $casts = [
@@ -94,5 +95,13 @@ class Product extends Model
     public function specs()
     {
         return $this->hasMany(ProductSpec::class);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+        return asset('storage/products/' . $this->image);
     }
 }

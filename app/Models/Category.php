@@ -42,4 +42,10 @@ class Category extends Model
             ->limit($limit)
             ->get();
     }
+
+    // 與商品的關係
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

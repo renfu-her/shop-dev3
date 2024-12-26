@@ -63,8 +63,7 @@
 
                             <div class="mb-3">
                                 <label for="sub_title" class="form-label">副標題</label>
-                                <textarea class="form-control @error('sub_title') is-invalid @enderror" id="sub_title"
-                                    name="sub_title" rows="3">{{ old('sub_title') }}</textarea>
+                                <textarea class="form-control @error('sub_title') is-invalid @enderror" id="sub_title" name="sub_title" rows="3">{{ old('sub_title') }}</textarea>
                                 @error('sub_title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -117,20 +116,33 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="images" class="form-label">新增圖片 (<span class="text-danger">寬度
+                                <label for="image" class="form-label">主要圖片 (<span class="text-danger">寬度
                                         800px，高度不限</span>)</label>
-                                <input type="file" class="form-control @error('images.*') is-invalid @enderror"
-                                    id="images" name="images[]" multiple accept="image/*">
-                                <small class="text-muted">可以選擇多張圖片，第一張圖片將作為主圖</small>
-                                @error('images.*')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    id="image" name="image" accept="image/*">
+                                <small class="text-muted">請上傳商品主圖</small>
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <div id="imagePreview" class="row g-2"></div>
+                                <div id="mainImagePreview"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="images" class="form-label">其他圖片 (<span class="text-danger">寬度
+                                        800px，高度不限</span>)</label>
+                                <input type="file" class="form-control @error('images.*') is-invalid @enderror"
+                                    id="images" name="images[]" multiple accept="image/*">
+                                <small class="text-muted">可以選擇多張圖片</small>
+                                @error('images.*')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <div id="multiImagePreview" class="row g-2"></div>
                             </div>
 
                             <div class="mb-3 d-flex align-items-center gap-4">
@@ -147,7 +159,7 @@
                                 <div>
                                     <input type="checkbox" class="form-check-input p-1" id="is_hot" name="is_hot"
                                         value="1" {{ old('is_hot') ? 'checked' : '' }}>
-                                    <label class="form-check-label p-1" for="is_hot">熱銷標籤</label>
+                                    <label class="form-check-label p-1" for="is_hot">熱銷��籤</label>
                                 </div>
                             </div>
 
@@ -218,39 +230,46 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // 主圖預覽
+            $('#image').on('change', function(e) {
+                const $preview = $('#mainImagePreview');
+                $preview.empty();
 
-            // 表單提交前驗證
-            $('form').on('submit', function(e) {
-                const description = editor.getData();
-
-                if (!description.trim()) {
-                    e.preventDefault();
-                    alert('請填寫商品描述');
-                    return false;
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $preview.html(`
+                            <div class="card" style="max-width: 300px;">
+                                <img src="${e.target.result}" class="card-img-top" alt="主圖預覽">
+                                <div class="card-body p-2">
+                                    <small class="text-muted">主要圖片</small>
+                                </div>
+                            </div>
+                        `);
+                    }
+                    reader.readAsDataURL(file);
                 }
-
-                // 更新隱藏的 textarea 值
-                $('#description').val(description);
             });
 
-            // 圖片預覽代碼保持不變
+            // 多圖預覽
             $('#images').on('change', function(e) {
-                const $preview = $('#imagePreview');
+                const $preview = $('#multiImagePreview');
                 $preview.empty();
 
                 $.each(e.target.files, function(index, file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         $preview.append(`
-                    <div class="col-md-3 mb-2">
-                        <div class="card">
-                            <img src="${e.target.result}" class="card-img-top" alt="Preview">
-                            <div class="card-body p-2">
-                                <small class="text-muted">圖片 ${index + 1}</small>
+                            <div class="col-md-3 mb-2">
+                                <div class="card">
+                                    <img src="${e.target.result}" class="card-img-top" alt="預覽">
+                                    <div class="card-body p-2">
+                                        <small class="text-muted">圖片 ${index + 1}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                `);
+                        `);
                     }
                     reader.readAsDataURL(file);
                 });

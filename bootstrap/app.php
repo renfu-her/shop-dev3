@@ -39,6 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'profile',
             'cart/add',
             'feedback',
+            'convert',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
