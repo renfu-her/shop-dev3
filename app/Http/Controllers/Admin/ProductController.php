@@ -73,20 +73,16 @@ class ProductController extends Controller
         $validated['is_active'] = $request->has('is_active') ? 1 : 0;
         $validated['is_hot'] = $request->has('is_hot') ? 1 : 0;
 
-        $data = $request->validated();
-
-        dd($data);
-
         // 處理主圖
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $filename = Str::uuid7() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('products', $filename, 'public');
-            $data['image'] = $filename;
+            $validated['image'] = $filename;
         }
 
         // 創建產品
-        $product = Product::create($data);
+        $product = Product::create($validated);
 
         // 處理多圖片
         if ($request->hasFile('images')) {
