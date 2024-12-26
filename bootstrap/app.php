@@ -40,6 +40,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'cart/add',
             'feedback',
             'convert',
+            'admin/products/*/sort-images',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

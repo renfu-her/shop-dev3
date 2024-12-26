@@ -39,6 +39,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('post.login');
     Route::match(['get', 'post'], '/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+    Route::post('products/{product}/sort-images', [ProductController::class, 'sortImages'])->name('products.sort-images');
+
 });
 
 

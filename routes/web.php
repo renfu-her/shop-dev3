@@ -153,3 +153,4 @@ Route::get('/cart/count', [NavigationController::class, 'getCartCount'])->name('
 // 問題回饋
 Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+

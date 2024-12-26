@@ -144,6 +144,47 @@
                             </div>
 
                             <div class="mb-3">
+                                <label class="form-label">其他圖片</label>
+                                <div class="row" id="additional-images-container">
+                                    @foreach ($product->images()->orderBy('sort_order')->get() as $image)
+                                        <div class="col-md-3 mb-3" data-id="{{ $image->id }}">
+                                            <div class="card h-100">
+                                                <div class="position-relative">
+                                                    <img src="{{ $image->image_url }}" class="card-img-top"
+                                                        alt="{{ $product->name }}">
+                                                    <div class="drag-handle">
+                                                        <i class="fas fa-grip-vertical"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer p-2 text-center">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-danger delete-additional-image"
+                                                        data-image-id="{{ $image->id }}">
+                                                        刪除圖片
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="additional_images" class="form-label">新增其他圖片</label>
+                                <input type="file"
+                                    class="form-control @error('additional_images') is-invalid @enderror"
+                                    id="additional_images" name="additional_images[]" accept="image/*" multiple>
+                                <small class="text-muted">可以選擇多張商品圖片</small>
+                                @error('additional_images')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <div id="additionalImagesPreview" class="row g-2"></div>
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label">產品規格 <small class="text-muted">(管理產品規格按鈕進行設定)</small></label>
                                 <div class="border p-3 rounded">
                                     <div class="row">
@@ -331,7 +372,7 @@
                 }
             });
 
-            // 定義產品ID供 AJAX 使��
+            // 定義產品ID供 AJAX 使用
             const productId = {{ $product->id }};
 
             // 圖片預覽
@@ -370,6 +411,71 @@
                             $('.card-img-wrapper').parent().parent().parent().remove();
                             $('#image').prop('required', true);
                         }
+                    });
+                }
+            });
+
+            // 初始化排序功能
+            const sortableContainer = document.getElementById('additional-images-container');
+            if (sortableContainer) {
+                new Sortable(sortableContainer, {
+                    animation: 150,
+                    handle: '.drag-handle',
+                    onEnd: function(evt) {
+                        const imageIds = Array.from(sortableContainer.children).map(el =>
+                            el.querySelector('.delete-additional-image').dataset.imageId
+                        );
+
+                        // 發送排序請求到後端
+                        $.ajax({
+                            url: `/admin/products/${productId}/sort-images`,
+                            method: 'POST',
+                            data: {
+                                image_ids: imageIds
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    // 可以添加成功提示
+                                    console.log('排序已更新');
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+
+            // 修改多張圖片預覽的程式碼，添加拖曳圖示
+            $('#additional_images').on('change', function(e) {
+                const $preview = $('#additionalImagesPreview');
+                $preview.empty();
+
+                if (e.target.files) {
+                    Array.from(e.target.files).forEach((file, index) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            $preview.append(`
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <div class="position-relative">
+                                            <img src="${e.target.result}" class="card-img-top" alt="Preview ${index + 1}">
+                                            <div class="drag-handle">
+                                                <i class="fas fa-grip-vertical"></i>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <small class="text-muted">新增圖片 ${index + 1}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        }
+                        reader.readAsDataURL(file);
+                    });
+
+                    // 初始化預覽圖片的排序
+                    new Sortable($preview[0], {
+                        animation: 150,
+                        handle: '.drag-handle'
                     });
                 }
             });

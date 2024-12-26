@@ -106,11 +106,11 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="image" class="form-label">上傳圖片 (<span class="text-danger">寬度
+                                <label for="image" class="form-label">主要圖片 (<span class="text-danger">寬度
                                         800px，高度不限</span>)</label>
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
                                     id="image" name="image" accept="image/*" required>
-                                <small class="text-muted">請上��商品圖片</small>
+                                <small class="text-muted">請上傳商品主圖</small>
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -118,6 +118,21 @@
 
                             <div class="mb-3">
                                 <div id="imagePreview" class="row g-2"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="additional_images" class="form-label">其他圖片 (<span
+                                        class="text-danger">可多選</span>)</label>
+                                <input type="file" class="form-control @error('additional_images') is-invalid @enderror"
+                                    id="additional_images" name="additional_images[]" accept="image/*" multiple>
+                                <small class="text-muted">可以選擇多張商品圖片</small>
+                                @error('additional_images')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <div id="additionalImagesPreview" class="row g-2"></div>
                             </div>
 
                             <div class="mb-3 d-flex align-items-center gap-4">
@@ -235,6 +250,68 @@
                     reader.readAsDataURL(e.target.files[0]);
                 }
             });
+
+            // 多張圖片預覽
+            $('#additional_images').on('change', function(e) {
+                const $preview = $('#additionalImagesPreview');
+                $preview.empty();
+
+                if (e.target.files) {
+                    Array.from(e.target.files).forEach((file, index) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            $preview.append(`
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="${e.target.result}" class="card-img-top" alt="Preview ${index + 1}">
+                                        <div class="card-body p-2">
+                                            <small class="text-muted">新增圖片 ${index + 1}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                }
+            });
+
+            // 在 edit.blade.php 中還需要添加刪除其他圖片的處理
+            $('.delete-additional-image').on('click', function() {
+                const imageId = $(this).data('image-id');
+                if (confirm('確定要刪除此圖片嗎？')) {
+                    $.ajax({
+                        url: `/admin/products/${productId}/additional-image/${imageId}`,
+                        method: 'DELETE',
+                        success: function() {
+                            $(this).closest('.col-md-3').remove();
+                        }.bind(this)
+                    });
+                }
+            });
         });
     </script>
+@endpush
+
+@push('styles')
+    <style>
+        .sortable-ghost {
+            opacity: 0.5;
+        }
+
+        .sortable-chosen {
+            background-color: #f8f9fa;
+        }
+
+        .drag-handle {
+            cursor: move;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 3px;
+        }
+    </style>
 @endpush

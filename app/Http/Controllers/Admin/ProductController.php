@@ -174,4 +174,40 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', '商品已刪除');
     }
+
+    /**
+     * 更新商品圖片排序
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function sortImages(Request $request, Product $product)
+    {
+        $imageIds = $request->input('image_ids', []);
+
+        // 確保所有圖片都屬於當前商品
+        $validImageIds = $product->images()
+            ->whereIn('id', $imageIds)
+            ->pluck('id')
+            ->toArray();
+
+        // 更新排序
+        foreach ($validImageIds as $index => $id) {
+            $product->images()
+                ->where('id', $id)
+                ->update(['sort_order' => $index + 1]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => '圖片排序已更新'
+        ]);
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => '更新排序失敗：' . $e->getMessage()
+        //     ], 500);
+        // }
+    }
 }
