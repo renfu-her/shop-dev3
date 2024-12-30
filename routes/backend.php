@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\{
     HomeAdsController,
     SiteSettingController,
     PostCategoryController,
+    FreeShippingController,
 };
 
 
@@ -41,7 +42,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::match(['get', 'post'], '/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
     Route::post('products/{product}/sort-images', [ProductController::class, 'sortImages'])->name('products.sort-images');
-
 });
 
 
@@ -168,4 +168,9 @@ Route::group([
 
     // PostCategory 路由
     Route::resource('post-categories', PostCategoryController::class);
+
+    // 免運費活動管理
+    Route::resource('free-shippings', FreeShippingController::class);
+    Route::post('free-shippings/{freeShipping}/toggle-active', [FreeShippingController::class, 'toggleActive'])
+        ->name('free-shippings.toggle-active');
 });
