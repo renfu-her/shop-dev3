@@ -243,38 +243,5 @@ resources/
 │ │
 │ └── layouts/ # 後台布局
 │ └── app.blade.php # - 主布局文件
-│
-└── frontend/ # 前台視圖
-├── layouts/ # 前台布局
-│ └── app.blade.php # - 主布局文件
-│
-├── order/ # 訂單相關
-│ └── list.blade.php # - 訂單列表
-│
-├── user/ # 用戶中心
-│ ├── profile.blade.php # - 個人資料
-│ ├── orders.blade.php # - 訂單記錄
-│ └── addresses.blade.php # - 收貨地址
-│
-├── products/ # 商品相關
-│ ├── index.blade.php # - 商品列表
-│ ├── show.blade.php # - 商品詳情
-│ └── category.blade.php # - 分類商品
-│
-├── cart/ # 購物車相關
-│ ├── index.blade.php # - 購物車頁面
-│ └── checkout.blade.php # - 結帳頁面
-│
-├── auth/ # 會員認證
-│ ├── login.blade.php # - 登入頁面
-│ ├── register.blade.php # - 註冊頁面
-│ └── forgot-password.blade.php # - 忘記密碼
-│
-└── pages/ # 靜態頁面
-├── home.blade.php # - 首頁
-├── about.blade.php # - 關於我們
-├── contact.blade.php # - 聯絡我們
-├── faq.blade.php # - 常見問題
-├── privacy.blade.php # - 隱私政策
-└── terms.blade.php # - 使用條款
+
 ```
