@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Illuminate\Support\Facades\Storage;
 class Post extends Model
 {
     use HasFactory;
@@ -31,5 +31,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(PostCategory::class, 'category_id');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? Storage::url('posts/' . $this->id . '/' . $this->image) : null;
     }
 }

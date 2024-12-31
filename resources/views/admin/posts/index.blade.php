@@ -21,6 +21,7 @@
                             <th style="width: 5%">ID</th>
                             <th>分類</th>
                             <th>標題</th>
+                            <th>圖片</th>
                             <th>排序</th>
                             <th>創建時間</th>
                             <th style="width: 15%">操作</th>
@@ -32,6 +33,9 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->title }}</td>
+                                <td>
+                                    <img src="{{ $post->image_url }}" alt="{{ $post->title }}" style="width: 100px; height: 100px;">
+                                </td>
                                 <td>
                                     {{ $post->sort_order }}
                                 </td>

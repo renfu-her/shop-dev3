@@ -51,6 +51,22 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="image" class="form-label">封面圖片</label>
+                                @if ($post->image)
+                                    <div class="mb-2">
+                                        <img src="{{ asset('storage/posts/' . $post->id . '/' . $post->image) }}"
+                                            alt="當前圖片" style="max-width: 200px;">
+                                    </div>
+                                @endif
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    id="image" name="image" accept="image/*">
+                                <div class="form-text">支援 jpg、png、gif 格式，檔案大小不超過 4MB</div>
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="sort_order" class="form-label">排序</label>
                                 <input type="number" class="form-control @error('sort_order') is-invalid @enderror"
                                     id="sort_order" name="sort_order" value="{{ old('sort_order', $post->sort_order) }}"
@@ -93,23 +109,6 @@
                                     value="{{ old('seo_keywords', $post->seo_keywords) }}">
                                 <div class="form-text">多個關鍵字請用逗號分隔</div>
                                 @error('seo_keywords')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-
-                            <div class="mb-3">
-                                <label for="image" class="form-label">封面圖片</label>
-                                @if ($post->image)
-                                    <div class="mb-2">
-                                        <img src="{{ asset('storage/posts/' . $post->id . '/' . $post->image) }}"
-                                            alt="當前圖片" style="max-width: 200px;">
-                                    </div>
-                                @endif
-                                <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                    id="image" name="image" accept="image/*">
-                                <div class="form-text">支援 jpg、png、gif 格式，檔案大小不超過 4MB</div>
-                                @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
