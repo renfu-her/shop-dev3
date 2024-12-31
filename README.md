@@ -1,4 +1,4 @@
-# 電商模板
+# 後臺 DEMO
 
 ## 後台管理
 - `/admin`
@@ -25,7 +25,7 @@
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=shop1-dev
+DB_DATABASE=admin-standard
 DB_USERNAME=root
 DB_PASSWORD=
 ```
