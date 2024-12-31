@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="content" class="form-label">內容</label>
+                                <label for="content" class="form-label">內容 (Markdown 語法)</label>
                                 <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10">{{ old('content') }}</textarea>
                                 @error('content')
                                     <div class="invalid-feedback">
@@ -51,8 +51,8 @@
 
                             <div class="mb-3">
                                 <label for="image" class="form-label">封面圖片</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" 
-                                       id="image" name="image" accept="image/*">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    id="image" name="image" accept="image/*">
                                 <div class="form-text">支援 jpg、png、gif 格式，檔案大小不超過 4MB</div>
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -120,18 +120,17 @@
     </div>
 @endsection
 
-@include('admin.partials.ckeditor')
-
 @push('styles')
-    <style>
-        .ck-editor__editable {
-            height: 500px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 @endpush
 
 @push('scripts')
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <script>
+        const easyMDE = new EasyMDE({
+            element: document.getElementById('content')
+        });
+
         $(document).ready(function() {
 
             $('form').on('submit', function(e) {

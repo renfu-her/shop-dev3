@@ -31,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'logout',
             'admin/orders/update-shipping-status',
             'admin/logout',
+            'admin/login',
             'admin/orders/*/update-status',
             'member/agreement',
             'login',

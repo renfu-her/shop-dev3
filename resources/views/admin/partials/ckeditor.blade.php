@@ -39,7 +39,7 @@
         } from 'ckeditor5';
 
         ClassicEditor
-            .create(document.querySelector('#content'), {
+            .create(document.querySelector('.ckeditor5'), {
                 language: 'zh',
                 simpleUpload: {
                     uploadUrl: '{{ route('admin.upload.image') }}',

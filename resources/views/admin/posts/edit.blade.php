@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="content" class="form-label">內容</label>
+                                <label for="content" class="form-label">內容 (Markdown 語法)</label>
                                 <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10">{{ old('content', $post->content) }}</textarea>
                                 @error('content')
                                     <div class="invalid-feedback">
@@ -129,18 +129,17 @@
     </div>
 @endsection
 
-@include('admin.partials.ckeditor')
-
 @push('styles')
-    <style>
-        .ck-editor__editable {
-            height: 500px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 @endpush
 
 @push('scripts')
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <script>
+        const easyMDE = new EasyMDE({
+            element: document.getElementById('content')
+        });
+
         $(document).ready(function() {
 
             $('form').on('submit', function(e) {
