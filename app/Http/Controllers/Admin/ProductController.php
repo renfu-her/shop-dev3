@@ -73,22 +73,29 @@ class ProductController extends Controller
         $validated['is_active'] = $request->has('is_active') ? 1 : 0;
         $validated['is_hot'] = $request->has('is_hot') ? 1 : 0;
 
-        // 處理主圖
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = Str::uuid7() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('products', $filename, 'public');
-            $validated['image'] = $filename;
-        }
-
         // 創建產品
         $product = Product::create($validated);
 
+
+        // 處理主圖
+        if ($request->hasFile('image')) {
+            $image = $this->imageService->uploadImage(
+                $request->file('image'),
+                'products/' . $product->id
+            );
+
+            $product->update([
+                'image' => $image
+            ]);
+        }
+
         // 處理多圖片
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $image) {
-                $filename = time() . '_' . ($index + 1) . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs("products/{$product->id}", $filename, 'public');
+        if ($request->hasFile('additional_images')) {
+            foreach ($request->file('additional_images') as $index => $image) {
+                $filename = $this->imageService->uploadImage(
+                    $image,
+                    "products/{$product->id}"
+                );
 
                 $product->images()->create([
                     'image_path' => $filename,
@@ -133,10 +140,23 @@ class ProductController extends Controller
         $validated['is_hot'] = $request->has('is_hot') ? 1 : 0;
         $product->update($validated);
 
-        if ($request->hasFile('images')) {
+        // 處理主圖
+        if ($request->hasFile('image')) {
+            $validated['image'] = $this->imageService->uploadImage(
+                $request->file('image'),
+                'products/' . $product->id
+            );
+
+            $product->update([
+                'image' => $validated['image']
+            ]);
+        }
+
+        // 處理多圖片
+        if ($request->hasFile('additional_images')) {
             $maxOrder = $product->images()->max('sort_order') ?? -1;
 
-            foreach ($request->file('images') as $image) {
+            foreach ($request->file('additional_images') as $image) {
                 $filename = $this->imageService->uploadImage(
                     $image,
                     "products/{$product->id}"
@@ -150,14 +170,6 @@ class ProductController extends Controller
             }
         }
 
-        // $specs = $request->input('specs', []);
-
-        // $product->specs()->sync(
-        //     collect($specs)->mapWithKeys(function ($id) {
-        //         return [$id => ['is_active' => true]];
-        //     })
-        // );
-
         return redirect()->route('admin.products.index')
             ->with('success', '商品已更新');
     }
@@ -166,13 +178,44 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
+        // 刪除主圖
         if ($product->image) {
-            Storage::disk('public')->delete($product->image);
+            Storage::disk('public')->delete('products/' . $product->id . '/' . $product->image);
         }
 
+        // 刪除商品附圖
+        foreach ($product->images as $image) {
+            Storage::disk('public')->delete('products/' . $product->id . '/' . $image->image_path);
+        }
+
+        // 刪除商品圖片目錄
+        Storage::disk('public')->deleteDirectory('products/' . $product->id);
+
+        // 刪除商品資料
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', '商品已刪除');
+    }
+
+    public function destroyImage(Request $request)
+    {
+        $imageId = $request->input('image_id');
+        $product = Product::findOrFail($imageId);
+
+        // 刪除主圖檔案
+        if ($product->image) {
+            Storage::disk('public')->delete('products/' . $product->id . '/' . $product->image);
+        }
+
+        // 更新資料庫，清空圖片欄位
+        $product->update([
+            'image' => null
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => '主圖已刪除'
+        ]);
     }
 
     /**
@@ -187,27 +230,21 @@ class ProductController extends Controller
         $imageIds = $request->input('image_ids', []);
 
         // 確保所有圖片都屬於當前商品
-        $validImageIds = $product->images()
-            ->whereIn('id', $imageIds)
-            ->pluck('id')
-            ->toArray();
+        $validImages = ProductImage::whereIn('id', $imageIds)
+            ->where('product_id', $product->id)
+            ->get()
+            ->keyBy('id');
 
-        // 更新排序
-        foreach ($validImageIds as $index => $id) {
-            $product->images()
-                ->where('id', $id)
-                ->update(['sort_order' => $index + 1]);
+        // 根據傳入的 imageIds 順序更新排序
+        foreach($imageIds as $index => $imageId) {
+            if(isset($validImages[$imageId])) {
+                $validImages[$imageId]->update(['sort_order' => $index + 1]);
+            }
         }
 
         return response()->json([
             'success' => true,
             'message' => '圖片排序已更新'
         ]);
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => '更新排序失敗：' . $e->getMessage()
-        //     ], 500);
-        // }
     }
 }

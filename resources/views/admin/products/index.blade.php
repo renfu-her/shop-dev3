@@ -41,8 +41,8 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>
-                                    @if ($product->images()->where('is_primary', true)->first())
-                                        <img src="{{ asset('storage/products/' . $product->id . '/' . $product->images()->where('is_primary', true)->first()->image_path) }}"
+                                    @if ($product->image)
+                                        <img src="{{ asset('storage/products/' . $product->id . '/' . $product->image) }}"
                                             alt="{{ $product->name }}" width="50">
                                     @endif
                                 </td>

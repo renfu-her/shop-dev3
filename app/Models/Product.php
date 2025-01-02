@@ -102,7 +102,7 @@ class Product extends Model
         if (!$this->image) {
             return null;
         }
-        return asset('storage/products/' . $this->image);
+        return asset('storage/products/' . $this->id . '/' . $this->image);
     }
 
     public function getSpecPriceAttribute()

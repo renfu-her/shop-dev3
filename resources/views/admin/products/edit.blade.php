@@ -101,20 +101,20 @@
                             </div>
 
                             <div class="mb-3">
-                                @if ($product->primaryImage)
+                                @if ($product->image_url)
                                     <div class="mb-3">
                                         <label class="form-label">目前圖片</label>
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="card h-100">
                                                     <div class="card-img-wrapper">
-                                                        <img src="{{ $product->primaryImage->image_url }}"
-                                                            class="card-img-top" alt="{{ $product->name }}">
+                                                        <img src="{{ $product->image_url }}" class="card-img-top"
+                                                            alt="{{ $product->name }}">
                                                     </div>
                                                     <div class="card-footer p-2 text-center">
                                                         <button type="button"
                                                             class="btn btn-sm btn-outline-danger delete-image"
-                                                            data-image-id="{{ $product->primaryImage->id }}">
+                                                            data-image-id="{{ $product->id }}">
                                                             刪除圖片
                                                         </button>
                                                     </div>
@@ -401,15 +401,15 @@
             // 刪除圖片
             $('.delete-image').on('click', function() {
                 if (confirm('確定要刪除此圖片嗎？')) {
+                    const imageId = $(this).data('image-id');
                     $.ajax({
-                        url: `/admin/products/${productId}/image`,
+                        url: `{{ route('admin.products.image.destroy') }}`,
                         method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        data: {
+                            image_id: imageId
                         },
                         success: function() {
-                            $('.card-img-wrapper').parent().parent().parent().remove();
-                            $('#image').prop('required', true);
+                            window.location.reload();
                         }
                     });
                 }

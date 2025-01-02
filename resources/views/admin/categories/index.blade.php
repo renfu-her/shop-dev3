@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>分類管理</h2>
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">新增分類</a>
+            <h2>商品分類管理</h2>
+            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">新增商品分類</a>
         </div>
 
         @if (session('success'))

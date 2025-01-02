@@ -39,7 +39,7 @@
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#article-management" aria-expanded="false">
                 <i class="fas fa-box menu-icon"></i>
-                <span class="menu-title">文章維護</span>
+                <span class="menu-title">文章管理</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="article-management">
@@ -47,13 +47,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.post-categories.index') }}">
                             <i class="fas fa-newspaper menu-icon"></i>
-                            <span class="menu-title">分類維護</span>
+                            <span class="menu-title">分類管理</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.posts.index') }}">
                             <i class="fas fa-newspaper menu-icon"></i>
-                            <span class="menu-title">文章維護</span>
+                            <span class="menu-title">文章管理</span>
                         </a>
                     </li>
                 </ul>
@@ -72,7 +72,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.categories.index') }}">
                             <i class="fas fa-list menu-icon"></i>
-                            <span class="menu-title">類別管理</span>
+                            <span class="menu-title">分類管理</span>
                         </a>
                     </li>
                     <li class="nav-item">

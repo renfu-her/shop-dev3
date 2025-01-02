@@ -72,6 +72,8 @@ Route::group([
         Route::post('{product}/images/order', [ProductImageController::class, 'updateOrder'])->name('images.order');
         // 設置主圖
         Route::post('{product}/images/{image}/primary', [ProductImageController::class, 'setPrimary'])->name('images.primary');
+        // 刪除主圖
+        Route::delete('image/destroy', [ProductController::class, 'destroyImage'])->name('image.destroy');
         // 刪除圖片
         Route::delete('{product}/images/{image}', [ProductImageController::class, 'destroy'])->name('images.destroy');
     });
@@ -98,23 +100,6 @@ Route::group([
 
     // 關於我們管理
     Route::resource('posts', PostController::class);
-
-
-    // 印章知識文章路由
-    Route::resource('seal-knowledge', SealKnowledgeController::class);
-    Route::post('seal-knowledge/update-sort', [SealKnowledgeController::class, 'updateSort'])
-        ->name('seal-knowledge.update-sort');
-    Route::post('seal-knowledge/{knowledge}/toggle-status', [SealKnowledgeController::class, 'toggleStatus'])
-        ->name('seal-knowledge.toggle-status');
-
-    // 印章知識分類路由
-    Route::resource('seal-knowledge-category', SealKnowledgeCategoryController::class);
-    Route::post('seal-knowledge-category/update-sort', [SealKnowledgeCategoryController::class, 'updateSort'])
-        ->name('seal-knowledge-category.update-sort');
-    Route::post('seal-knowledge-category/{category}/toggle-status', [SealKnowledgeCategoryController::class, 'toggleStatus'])
-        ->name('seal-knowledge-category.toggle-status');
-    Route::get('seal-knowledge-category/active/list', [SealKnowledgeCategoryController::class, 'getActiveCategories'])
-        ->name('seal-knowledge-category.active');
 
     // 規格管理
     Route::resource('specifications', ProductSpecificationController::class);
