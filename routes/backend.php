@@ -75,7 +75,7 @@ Route::group([
         // 刪除主圖
         Route::delete('image/destroy', [ProductController::class, 'destroyImage'])->name('image.destroy');
         // 刪除圖片
-        Route::delete('{product}/images/{image}', [ProductImageController::class, 'destroy'])->name('images.destroy');
+        Route::delete('images/destroy', [ProductImageController::class, 'destroy'])->name('images.destroy');
     });
 
     // 常見問題管理

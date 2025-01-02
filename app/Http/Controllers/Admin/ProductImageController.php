@@ -45,7 +45,7 @@ class ProductImageController extends Controller
 
             foreach ($request->file('images') as $image) {
                 $path = $image->store('products/' . $product->id, 'public');
-                
+
                 $productImage = $product->images()->create([
                     'image_path' => $path,
                     'is_primary' => $request->input('is_primary', false),
@@ -91,14 +91,16 @@ class ProductImageController extends Controller
     }
 
     // 刪除圖片
-    public function destroy($productId, $imageId)
+    public function destroy(Request $request)
     {
-        $product = Product::findOrFail($productId);
-        $image = $product->images()->findOrFail($imageId);
+        $imageId = $request->input('image_id');
+        $image = ProductImage::findOrFail($imageId);
+        $product = $image->product;
 
         // 刪除實際檔案
-        Storage::disk('public')->delete('products/' . $product->id . '/' . $image->image_path);
+        Storage::disk('public')->delete($image->image_path);
 
+        // 刪除資料庫記錄
         $image->delete();
 
         return response()->json([
@@ -136,11 +138,11 @@ class ProductImageController extends Controller
     public function setPrimary($productId, $imageId)
     {
         $product = Product::findOrFail($productId);
-        
+
         DB::transaction(function () use ($product, $imageId) {
             // 將所有圖片設為非主圖
             $product->images()->update(['is_primary' => false]);
-            
+
             // 設置新的主圖
             $product->images()->findOrFail($imageId)->update(['is_primary' => true]);
         });

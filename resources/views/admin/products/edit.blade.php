@@ -415,6 +415,22 @@
                 }
             });
 
+            $('.delete-additional-image').on('click', function() {
+                if (confirm('確定要刪除此圖片嗎？')) {
+                    const imageId = $(this).data('image-id');
+                    $.ajax({
+                        url: `{{ route('admin.products.images.destroy') }}`,
+                        method: 'DELETE',
+                        data: {
+                            image_id: imageId
+                        },
+                        success: function() {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+
             // 初始化排序功能
             const sortableContainer = document.getElementById('additional-images-container');
             if (sortableContainer) {
