@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>後台管理系統</title>
-    <link rel="icon" href="{{ asset('frontend/img/favicon.svg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/blog-icon1.png') }}" type="image/x-icon">
 
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icons.min.css') }}">
