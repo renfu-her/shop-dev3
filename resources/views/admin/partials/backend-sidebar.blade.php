@@ -39,7 +39,7 @@
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#article-management" aria-expanded="false">
                 <i class="fas fa-box menu-icon"></i>
-                <span class="menu-title">文章管理</span>
+                <span class="menu-title">文章維護</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="article-management">
@@ -47,20 +47,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.post-categories.index') }}">
                             <i class="fas fa-newspaper menu-icon"></i>
-                            <span class="menu-title">分類管理</span>
+                            <span class="menu-title">分類維護</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.posts.index') }}">
                             <i class="fas fa-newspaper menu-icon"></i>
-                            <span class="menu-title">文章管理</span>
+                            <span class="menu-title">文章維護</span>
                         </a>
                     </li>
                 </ul>
 
             </div>
         </li>
-
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#product-management" aria-expanded="false">
                 <i class="fas fa-box menu-icon"></i>
@@ -117,6 +116,19 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.about-us.index') }}">
+                <i class="fas fa-info-circle menu-icon"></i>
+                <span class="menu-title">關於我們</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.feedbacks.index') }}">
+                <i class="fas fa-comment menu-icon"></i>
+                <span class="menu-title">反饋管理</span>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.email-settings.index') }}">
@@ -125,7 +137,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.settings.index') }}">
                 <i class="fas fa-cog menu-icon"></i>
                 <span class="menu-title">運費設定</span>

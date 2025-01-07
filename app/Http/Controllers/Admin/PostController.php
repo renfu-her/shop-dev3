@@ -43,7 +43,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:post_categories,id',
             'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'sort_order' => 'nullable|integer',
             'is_active' => 'boolean',
             'seo_title' => 'nullable|string|max:70',
@@ -51,8 +51,8 @@ class PostController extends Controller
             'seo_description' => 'nullable|string|max:155',
         ]);
 
-        
-        $validated['is_active'] = $request->boolean('is_active', false);
+
+        $validated['is_active'] = $validated['is_active'] ? 1 : 0;
 
         $post = Post::create($validated);
 
@@ -97,7 +97,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:post_categories,id',
             'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'sort_order' => 'nullable|integer',
             'is_active' => 'boolean',
             'seo_title' => 'nullable|string|max:70',
@@ -120,7 +120,7 @@ class PostController extends Controller
             }
         }
 
-        $validated['is_active'] = $request->boolean('is_active', false);
+        $validated['is_active'] = $validated['is_active'] ? 1 : 0;
 
         $post->update($validated);
 

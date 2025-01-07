@@ -34,7 +34,12 @@
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
-                                    <img src="{{ $post->image_url }}" alt="{{ $post->title }}" style="width: 100px; height: 100px;">
+                                    @if ($post->image_url)
+                                        <img src="{{ $post->image_url }}" alt="{{ $post->title }}"
+                                            style="width: 100px; height: 100px;">
+                                    @else
+                                        <span class="text-muted">無圖片</span>
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $post->sort_order }}
@@ -65,6 +70,16 @@
     </div>
 @endsection
 
+@push('styles')
+    <style>
+        .table td img, .jsgrid .jsgrid-table td img {
+            width: 150px !important;
+            height: auto !important;
+            border-radius: 0 !important;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     <script>
         $(document).ready(function() {
@@ -74,7 +89,8 @@
                 },
                 responsive: true,
                 order: [
-                    [1, 'asc']
+                    [4, 'asc'],
+                    [0, 'desc']
                 ],
                 columnDefs: [{
                     targets: -1,
