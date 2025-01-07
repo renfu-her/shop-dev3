@@ -29,6 +29,8 @@ use App\Http\Controllers\Admin\{
     SiteSettingController,
     PostCategoryController,
     FreeShippingController,
+    AboutUsController,
+    FeedbackController
 };
 
 
@@ -82,6 +84,9 @@ Route::group([
     Route::resource('faqs', FaqController::class);
     Route::resource('faq-categories', FaqCategoryController::class);
 
+    // 反饋管理
+    Route::resource('feedbacks', FeedbackController::class)->only(['index', 'show', 'destroy']);
+
     // 活動管理
     Route::resource('activities', ActivityController::class);
     Route::post('activities/{activity}/sort', [ActivityController::class, 'updateSort'])->name('activities.sort');
@@ -98,8 +103,12 @@ Route::group([
     Route::post('admins/{admin}/toggle-status', [AdminController::class, 'toggleStatus'])
         ->name('admins.toggle-status');
 
-    // 關於我們管理
+
+    // 文章管理
     Route::resource('posts', PostController::class);
+
+    // 關於我們管理
+    Route::resource('about-us', AboutUsController::class);
 
     // 規格管理
     Route::resource('specifications', ProductSpecificationController::class);
