@@ -7,9 +7,17 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Services\ImageService;
 
 class CategoryController extends Controller
 {
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     public function index()
     {
         $categories = Category::where('parent_id', 0)
@@ -38,15 +46,17 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'parent_id' => 'required|integer|min:0',
             'sort_order' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
 
         // 處理圖片上傳
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('categories', 'public');
-            $validated['image'] = $path;
+            $validated['image'] = $this->imageService->uploadImage(
+                $request->file('image'),
+                'categories'
+            );
         }
 
         Category::create($validated);
@@ -71,20 +81,17 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'parent_id' => 'required|integer|min:0',
             'sort_order' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
 
         // 處理圖片上傳
         if ($request->hasFile('image')) {
-            // 刪除舊圖片
-            if ($category->image) {
-                Storage::disk('public')->delete($category->image);
-            }
-
-            $path = $request->file('image')->store('categories', 'public');
-            $validated['image'] = $path;
+            $validated['image'] = $this->imageService->uploadImage(
+                $request->file('image'),
+                'categories'
+            );
         }
 
         $category->update($validated);
