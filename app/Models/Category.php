@@ -60,7 +60,7 @@ class Category extends Model
     public function getImageUrlAttribute()
     {
         if ($this->image) {
-            return asset('storage/' . $this->image);
+            return asset('storage/categories/' . $this->image);
         }
         return asset('images/no-image.png'); // 預設圖片
     }

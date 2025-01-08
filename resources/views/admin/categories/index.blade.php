@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th style="width: 5%">ID</th>
-                            <th style="width: 10%">圖片</th>
+                            <th style="width: 15%">圖片</th>
                             <th>名稱</th>
                             <th>排序</th>
                             <th>商品數量</th>
@@ -38,7 +38,7 @@
                                 <td>{{ $category->id }}</td>
                                 <td>
                                     <img src="{{ $category->image_url }}" alt="{{ $category->name }}"
-                                        style="max-width: 50px; height: auto;">
+                                        style="width: 100px; height: auto;">
                                 </td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->sort_order }}</td>

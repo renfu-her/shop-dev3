@@ -88,6 +88,11 @@ class CategoryController extends Controller
 
         // 處理圖片上傳
         if ($request->hasFile('image')) {
+
+            if ($category->image) {
+                Storage::disk('public')->delete('categories/' . $category->image);
+            }
+
             $validated['image'] = $this->imageService->uploadImage(
                 $request->file('image'),
                 'categories'
