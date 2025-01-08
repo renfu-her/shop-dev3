@@ -22,10 +22,10 @@ class CategoryController extends Controller
     {
         $categories = Category::where('parent_id', 0)
             ->with(['children' => function ($query) {
-                $query->orderBy('sort_order', 'asc');
+                $query->withCount('products');
             }])
-            ->orderBy('sort_order', 'asc')
             ->withCount('products')
+            ->orderBy('sort_order', 'asc')
             ->get();
 
         return view('admin.categories.index', compact('categories'));
@@ -33,9 +33,9 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $parentCategories = Category::where('parent_id', 0)
-            ->orderBy('sort_order', 'asc')
-            ->get();
+        // 使用遞歸函數獲取所有分類並添加層級標記
+        $categories = Category::orderBy('sort_order', 'asc')->get();
+        $parentCategories = $this->buildCategoryTree($categories);
 
         return view('admin.categories.create', compact('parentCategories'));
     }
@@ -67,10 +67,13 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $parentCategories = Category::where('parent_id', 0)
+        // 獲取所有分類並排除自己及其子分類
+        $categories = Category::orderBy('sort_order', 'asc')
             ->where('id', '!=', $category->id)
-            ->orderBy('sort_order', 'asc')
+            ->whereNotIn('id', $this->getAllChildrenIds($category))
             ->get();
+
+        $parentCategories = $this->buildCategoryTree($categories);
 
         return view('admin.categories.edit', compact('category', 'parentCategories'));
     }
@@ -121,5 +124,45 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')
             ->with('success', '分類刪除成功！');
+    }
+
+    // 遞歸構建分類樹
+    private function buildCategoryTree($categories, $parentId = 0, $prefix = '')
+    {
+        $result = [];
+
+        foreach ($categories as $category) {
+            if ($category->parent_id == $parentId) {
+                $result[] = [
+                    'id' => $category->id,
+                    'name' => $prefix . $category->name,
+                    'parent_id' => $category->parent_id
+                ];
+
+                // 遞歸獲取子分類
+                $children = $this->buildCategoryTree(
+                    $categories,
+                    $category->id,
+                    $prefix . '── '
+                );
+
+                $result = array_merge($result, $children);
+            }
+        }
+
+        return $result;
+    }
+
+    // 獲取所有子分類ID
+    private function getAllChildrenIds($category)
+    {
+        $ids = [];
+
+        foreach ($category->children as $child) {
+            $ids[] = $child->id;
+            $ids = array_merge($ids, $this->getAllChildrenIds($child));
+        }
+
+        return $ids;
     }
 }

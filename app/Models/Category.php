@@ -15,11 +15,35 @@ class Category extends Model
         'image'
     ];
 
-    // 獲取子分類
+    // 獲取子分類（支持多層）
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id')
+            ->with('children')  // 遞歸加載所有子分類
             ->orderBy('sort_order', 'asc');
+    }
+
+    // 獲取所有上層分類
+    public function ancestors()
+    {
+        $ancestors = collect();
+        $parent = $this->parent;
+
+        while ($parent) {
+            $ancestors->prepend($parent);
+            $parent = $parent->parent;
+        }
+
+        return $ancestors;
+    }
+
+    // 獲取完整分類路徑名稱
+    public function getFullPathAttribute()
+    {
+        return $this->ancestors()
+            ->pluck('name')
+            ->push($this->name)
+            ->implode(' > ');
     }
 
     // 獲取父分類

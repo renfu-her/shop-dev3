@@ -5,8 +5,8 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>常見問題分類管理</h2>
             <a href="{{ route('admin.faq-categories.create') }}" class="btn btn-primary">新增分類</a>
-        </div>
-
+        {!!  !!}iv>
+{!!  !!}
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

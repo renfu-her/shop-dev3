@@ -28,13 +28,13 @@
                                 <label for="parent_id" class="form-label">上層分類</label>
                                 <select class="form-control @error('parent_id') is-invalid @enderror" id="parent_id"
                                     name="parent_id">
-                                    <option value="0" {{ $category->parent_id === 0 ? 'selected' : '' }}>
+                                    <option value="0" {{ $category->parent_id == 0 ? 'selected' : '' }}>
                                         無上層分類
                                     </option>
                                     @foreach ($parentCategories as $parentCategory)
-                                        <option value="{{ $parentCategory->id }}"
-                                            {{ $category->parent_id === $parentCategory->id ? 'selected' : '' }}>
-                                            {{ $parentCategory->name }}
+                                        <option value="{{ $parentCategory['id'] }}"
+                                            {{ $category->parent_id == $parentCategory['id'] ? 'selected' : '' }}>
+                                            {{ $parentCategory['name'] }}
                                         </option>
                                     @endforeach
                                 </select>

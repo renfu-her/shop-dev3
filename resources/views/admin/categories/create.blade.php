@@ -27,9 +27,9 @@
                                 <select class="form-control @error('parent_id') is-invalid @enderror" id="parent_id"
                                     name="parent_id">
                                     <option value="0">無上層分類</option>
-                                    @foreach ($parentCategories as $parentCategory)
-                                        <option value="{{ $parentCategory->id }}">
-                                            {{ $parentCategory->name }}
+                                    @foreach ($parentCategories as $category)
+                                        <option value="{{ $category['id'] }}">
+                                            {{ $category['name'] }}
                                         </option>
                                     @endforeach
                                 </select>
