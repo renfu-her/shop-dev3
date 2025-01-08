@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'slug', 'parent_id', 'description', 'sort_order'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'parent_id',
+        'description',
+        'sort_order',
+        'image'
+    ];
 
     // 獲取子分類
     public function children()
@@ -26,7 +33,7 @@ class Category extends Model
     {
         return self::where('parent_id', 0)
             ->orderBy('sort_order')
-            ->with(['children' => function($query) {
+            ->with(['children' => function ($query) {
                 $query->orderBy('sort_order');
             }])
             ->get();
@@ -47,5 +54,14 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    // 獲取圖片完整URL
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+        return asset('images/no-image.png'); // 預設圖片
     }
 }
