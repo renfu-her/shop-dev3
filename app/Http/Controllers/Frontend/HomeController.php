@@ -14,51 +14,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $actives = Activity::orderByDesc('id')
-            ->where('is_active', 1)
-            ->get();
 
-        $hotProducts = Product::with('primaryImage')
-            ->where('is_active', 1)
-            ->where('is_hot', 1)
-            ->orderByDesc('created_at')
-            ->limit(8)
-            ->get();
-
-        $now = Carbon::now();
-        $ads = Advert::where('is_active', 1)
-            ->where(function ($query) use ($now) {
-                $query->where(function ($q) use ($now) {
-                    $q->whereNotNull('start_date')
-                        ->whereNotNull('end_date')
-                        ->where('start_date', '<=', $now)
-                        ->where('end_date', '>=', $now);
-                })->orWhere(function ($q) {
-                    $q->whereNull('start_date')
-                        ->whereNull('end_date');
-                })->orWhere(function ($q) use ($now) {
-                    $q->whereNotNull('start_date')
-                        ->whereNull('end_date')
-                        ->where('start_date', '<=', $now);
-                });
-            })
-            ->orderBy('sort_order', 'asc')
-            ->orderByDesc('id')
-            ->get();
-
-        $homeAds = HomeAd::where('is_active', 1)
-            ->orderBy('sort_order', 'asc')
-            ->orderByDesc('id')
-            ->get();
-
-        $specialProducts = Product::with('primaryImage')
-            ->where('is_active', 1)
-            ->where('special_price', '>', 0)
-            ->orderByDesc('created_at')
-            ->limit(8)
-            ->get();
-
-        return view('frontend.home', compact('actives', 'hotProducts', 'ads', 'homeAds', 'specialProducts'));
+        return view('frontend.home',);
     }
 
     public function memberAgreement()

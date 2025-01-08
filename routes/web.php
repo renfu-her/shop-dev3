@@ -1,11 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CaptchaController;
 
-Route::get('/', function () {
-    return redirect()->route('admin.products.index');
-});
+use App\Http\Controllers\Frontend\{
+    HomeController,
+};
+
+use App\Http\Controllers\{
+    CaptchaController,
+};
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // 驗證碼路由
 Route::get('/captcha', [CaptchaController::class, 'generate'])->name('captcha.generate');
